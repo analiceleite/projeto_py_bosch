@@ -1,14 +1,11 @@
 class item_biblioteca:
-    def __init__(self, id, preco, titulo, autoria, ano_lancamento, faixa_etaria, dimensoes, tiragem, premios, avaliacao_geral, idioma) -> None:
+    def __init__(self, id, titulo, autoria, ano_lancamento, classificacao_indicativa, tiragem, avaliacao_geral, idioma) -> None:
         self.__id = id
-        self.__preco = preco
         self.__titulo = titulo
         self.__autoria = autoria
         self.__ano_lancamento = ano_lancamento
-        self.__faixa_etaria = faixa_etaria
-        self.__dimensoes = dimensoes
+        self.__classificacao_indicativa = classificacao_indicativa
         self.__tiragem = tiragem
-        self.__premios = premios
         self.__avaliacao_geral = avaliacao_geral
         self.__idioma = idioma
 
@@ -17,10 +14,6 @@ class item_biblioteca:
         return self.__id
     def set_id(self, value):
         self.__id = value
-    def get_preco(self):
-        return self.__preco
-    def set_preco(self, value):
-        self.__preco = value
     def get_titulo(self):
         return self.__titulo
     def set_titulo(self, value):
@@ -33,22 +26,14 @@ class item_biblioteca:
         return self.__ano_lancamento
     def set_ano_lancamento(self, value):
         self.__ano_lancamento = value
-    def get_faixa_etaria(self):
-        return self.__faixa_etaria
-    def set_faixa_etaria(self, value):
-        self.__faixa_etaria = value
-    def get_dimensoes(self):
-        return self.__dimensoes
-    def set_dimensoes(self, value):
-        self.__dimensoes = value
+    def get_classificacao_indicativa(self):
+        return self.__classificacao_indicativa
+    def set_classificacao_indicativa(self, value):
+        self.__classificacao_indicativa = value
     def get_tiragem(self):
         return self.__tiragem
     def set_tiragem(self, value):
         self.__tiragem = value
-    def get_premios(self):
-        return self.__premios
-    def set_premios(self, value):
-        self.__premios = value
     def get_avaliacao_geral(self):
         return self.__avaliacao_geral
     def set_avaliacao_geral(self, value):
