@@ -1,0 +1,38 @@
+--- Entrada e saída
+
+-> Menu
+# Cadastrar, Buscar e Sair
+
+-> Cadastrar
+    -> Produto
+        : * Cadastrar produto
+        -> Categoria (livro, CD, DVD, vinil ou Blu-ray)
+        -> Atributos das respectivas classes
+        # Inserir campo de confirmação
+    -> Cliente
+        : * Cadastrar cliente
+            -> Nome completo
+            -> Telefone
+            -> Endereço
+        # Inserir campo de confirmação
+-> Buscar
+    : * Buscar
+        -> Categoria (filtro)
+        -> Nome
+        -> Voltar ao menu principal
+-> Alugar
+    : * Alugar um Produto 
+        -> Cliente
+        -> Produto
+        -> Data de retirada
+        -> Data de devolutiva 
+            : * Ter opção de escolha de tempo
+        # Inserir campo de confirmação
+            : * Se sim, mostrar quantos dias tem para a devolutiva e o valor da multa em caso de atraso.
+            : * Senão, voltar
+            
+            
+            
+           
+   
+        

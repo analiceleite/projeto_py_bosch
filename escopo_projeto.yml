@@ -1,0 +1,42 @@
+--- Projeto Py
+
+: * Livros
+: * CD
+: * Revistas
+: * Jogos de tabuleiro
+
+-> Classe mãe (Item biblioteca):
+    : * ID produto
+    : * Preço
+    : * Título
+    : * Autoria
+    : * Ano de lançamento
+    : * Faixa etária
+    : * Formato e tamanho
+    : * Tiragem (Quantidade de cópias e impressões)
+    : * Prêmios e reconhecimentos
+    : * Avaliação geral
+    : * Idioma
+-> Classe livro:
+    : * Quantidade de páginas
+    : * Gênero
+    : * Se é ou não best seller
+-> Classe midia física:
+    : * Tempo de duração
+    : * Categoria (CD, DVD ou Blu-ray, disco de vinil, fita)
+    : * Fabricante/ Marca (CD e DV corresponde a marca, Vinil, fabricante)
+-> Classe revista:
+    : * Quantidade de páginas
+    : * Volume/ edição
+    : * Seção de cartas dos leitores
+-> Classe jogos:
+    : * Categoria (cartas, jogos de mesa, jogos eletrônicos)
+    : * Mecanica de jogo (estratégia, jogo cooperativo, jogo de aventura, jogo de construção, entre outros)
+    : * Tempo de jogo
+    
+--- Verificações
+: * Haverá uma busca por nome, caso exista na biblioteca aparece a categoria.
+: * Verificar nomes iguais e implementar verificação por endereço em caso de nomes iguais (alugar)
+
+--- Sugestão de classe alugados (multa)
+--- Sugestão de incremento, haver um login admin e user

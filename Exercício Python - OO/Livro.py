@@ -1,33 +1,34 @@
-import ItemBiblioteca
-class Livro(ItemBiblioteca.ItemBiblioteca):
-    def __init__(self, titulo, autor, ano_publicacao, quant_paginas):
-        super().__init__(titulo, autor, ano_publicacao)
+from item_biblioteca import item_biblioteca
+
+class livro(item_biblioteca):
+    def __init__(self, id, preco, titulo, autoria, ano_lancamento, faixa_etaria, dimensoes, tiragem, premios, avaliacao_geral, idioma, quant_paginas, genero, is_best_seller) -> None:
+        super().__init__(id, preco, titulo, autoria, ano_lancamento, faixa_etaria, dimensoes, tiragem, premios, avaliacao_geral, idioma)
         self.__quant_paginas = quant_paginas
-    
+        self.__genero = genero
+        self.__is_best_seller = is_best_seller
+
+#Getter & Setters
     def get_quant_paginas(self):
         return self.__quant_paginas
-
-    
     def set_quant_paginas(self, value):
         self.__quant_paginas = value
+    def get_genero(self):
+        return self.__genero
+    def set_genero(self, value):
+        self.__genero = value
+    def get_is_best_seller(self):
+        return self.__is_best_seller
+    def set_is_best_seller(self, value):
+        self.__is_best_seller = value
 
-    # def get_titulo(self):
-    #     return self.__titulo
-
-    # def set_titulo(self, value):
-    #     self.__titulo = value
+    def criar_livro():
+        livro_em_andamento = livro
+        print()
 
 
-    # def get_autor(self):
-    #     return self.__autor
-
-    # def set_autor(self, value):
-    #     self.__autor = value
-
-    
-    # def get_ano_publicacao(self):
-    #     return self.__ano_publicacao
-
-    
-    # def set_ano_publicacao(self, value):
-    #     self.__ano_publicacao = value
+    def ler_livro():
+        print
+    def atualizar_livro():
+        print
+    def deletar_livro():
+        print

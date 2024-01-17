@@ -1,18 +1,11 @@
-from EntradaSaida import EntradaSaida
-import Processamento
-
+import entrada_saida
+from livro import livro
 
 def Main():
-    match MenuInicial():
-        case 1:
-            MenuCadastro()
-
-def MenuInicial():
-    return EntradaSaida.menuOpcoes()
-
-def MenuCadastro():
-    match EntradaSaida.menuCadastro():
-        case 1:
-            Processamento.cadastrarLivro()
-            
-Main()
+    match entrada_saida.menu_principal():
+        case 1: #Escolha do tipo de cadastro
+            match entrada_saida.menu_escolher_tipo_cadastro():
+                case 1: #Escolha de categoria do produto
+                    match entrada_saida.menu_escolher_categoria("principal"):
+                        case 1: #Livro
+                            livro.criar_livro()
