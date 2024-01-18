@@ -1,5 +1,6 @@
 from item_biblioteca import item_biblioteca
 import entrada_saida
+import validacao
 
 class livro(item_biblioteca):
     def __init__(self):
@@ -21,10 +22,10 @@ class livro(item_biblioteca):
     def set_is_best_seller(self, value):
         self.__is_best_seller = value
 
-    def criar_livro(self):
+    def criar_livro(self,estoque):
     
         self.set_titulo(entrada_saida.solicitar_cadastro_produto_geral("o titulo"))
-        self.__genero = entrada_saida.solicitar_cadastro_produto_geral("o gênero")
+        self.__genero = entrada_saida.menu_solicitar_categoria_livro()
         self.set_autoria(entrada_saida.solicitar_cadastro_produto_geral("a autoria"))
         self.set_ano_lancamento(entrada_saida.solicitar_cadastro_produto_geral_int("o ano de lançamento"))#Validar número negativo
         self.__quant_paginas = entrada_saida.solicitar_cadastro_produto_geral_int("a quantidade de páginas") #Validar número negativo
@@ -33,12 +34,9 @@ class livro(item_biblioteca):
         self.set_tiragem(entrada_saida.solicitar_cadastro_produto_geral_int("a tiragem")) #Validar número negativo
         self.set_avaliacao_geral(entrada_saida.solicitar_cadastro_produto_geral_float("a avaliação geral"))#Validar número negativo
         self.__is_best_seller = entrada_saida.solicitar_best_seller()
-
-        entrada_saida.solicitar_confirmacao_livro(self)
         
-
-
-#del objeto
+        validacao.confirmar_cadastro_livro(self,estoque)
+        
     def ler_livro():
         print
     def atualizar_livro():

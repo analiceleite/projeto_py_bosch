@@ -8,7 +8,7 @@ class item_biblioteca:
         self.__tiragem = None
         self.__avaliacao_geral = None
         self.__idioma = None
-
+        
 #Getter & Setters
     def get_id(self):
         return self.__id
@@ -42,5 +42,4 @@ class item_biblioteca:
         return self.__idioma
     def set_idioma(self, value):
         self.__idioma = value
-
-
+    
