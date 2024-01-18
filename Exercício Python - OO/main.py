@@ -10,8 +10,9 @@ def Main():
                 case 1: #Escolha de categoria do produto
                     match entrada_saida.menu_escolher_tipo_produto():
                         case 1: #Livro
-                            livro_em_cadastro = livro()
-                            livro_em_cadastro.criar_livro()
+                            livro_em_andamento = livro()
+                            livro_em_andamento.criar_livro()
+                            
                         case 2:
                             midia_digital.criar_midia_digital()
                         case 3:

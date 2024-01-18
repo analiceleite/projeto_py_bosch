@@ -3,7 +3,7 @@ from midia_digital import midia_digital
 from revista import revista
 
 def retorno_opcao_inteiro():
-    return int(input("Opção --> "))
+    return int(input("---> "))
 def retorno_opcao_float():
     return float(input("Opção --> "))
 def retorno_opcao_string():
@@ -80,4 +80,4 @@ def solicitar_best_seller():
     return retorno_opcao_inteiro()
 
 def solicitar_confirmacao_livro(livro_em_cadastro):
-    print("Título: "+livro.get_titulo(livro_em_cadastro))
+    print("Título:",livro_em_cadastro.get_titulo(),"\nGênero:",livro_em_cadastro.get_genero(),"\nAutoria:",livro_em_cadastro.get_autoria(),"\nAno lançamento:",livro_em_cadastro.get_ano_lancamento(),"\nQuantidade de páginas:",livro_em_cadastro.get_quant_paginas(),"pgs.\nClassificação indicativa:",livro_em_cadastro.get_classificacao_indicativa(),"+\nIdioma:",livro_em_cadastro.get_idioma()+"\nTiragem:",livro_em_cadastro.get_tiragem(),"\nAvaliação:",livro_em_cadastro.get_avaliacao_geral(),"\nBest Seller:",livro_em_cadastro.get_is_best_seller())

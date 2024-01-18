@@ -1,13 +1,13 @@
 class item_biblioteca:
-    def __init__(self, id, titulo, autoria, ano_lancamento, classificacao_indicativa, tiragem, avaliacao_geral, idioma) -> None:
-        self.__id = id
-        self.__titulo = titulo
-        self.__autoria = autoria
-        self.__ano_lancamento = ano_lancamento
-        self.__classificacao_indicativa = classificacao_indicativa
-        self.__tiragem = tiragem
-        self.__avaliacao_geral = avaliacao_geral
-        self.__idioma = idioma
+    def __init__(self):
+        self.__id = None
+        self.__titulo = None
+        self.__autoria = None
+        self.__ano_lancamento = None
+        self.__classificacao_indicativa = None
+        self.__tiragem = None
+        self.__avaliacao_geral = None
+        self.__idioma = None
 
 #Getter & Setters
     def get_id(self):
