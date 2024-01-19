@@ -22,12 +22,18 @@ def menu_escolher_tipo_cadastro():
     print("[1]- Produto\n[2]- Cliente\n[3]- Voltar ao menu principal")
     return retorno_opcao_inteiro()
 
+def menu_item_pesquisado():
+    print("[1]- Alugar\n[2]- Buscar outro produto\n[3]- Voltar ao menu principal")
+    return retorno_opcao_inteiro()
+
+def confirmar_aluguel():
+    print("Analice, deseja confirmar o aluguel")
+
 def menu_escolher_categoria(mensagem):
     print("[1]- Livro\n[2]- CD\n[3]- DVD\n[4]- Disco de vinil\n[5]- Blu-Ray\n[6]- Voltar ao menu "+mensagem)
     return retorno_opcao_inteiro()
 
 #Menus Jogos
-#-----------
 
 #Menus Mídia digital
 def menu_escolher_tipo_produto():

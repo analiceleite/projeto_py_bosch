@@ -27,13 +27,19 @@ def main():
                             main()
                         case 4: #Jogos
                             print
-                            #inserir jogos
+                            #Inserir jogos
         case 2: #Buscar
             match entrada_saida.menu_buscar():
                 case 1: #Exibir lista geral de produtos
                     estoque.exibir_lista_produto()
                     produto_em_busca = estoque.buscar_produto(entrada_saida.solicitar_id_buscar())
-                    
+                    match entrada_saida.menu_item_pesquisado():
+                        case 1: #Alugar
+                            print
+                        case 2: #Buscar outro produto
+                            print
+                        case 3: #Voltar ao menu principal
+                            print
 
                 case 2: #Voltar ao menu principal
                     main()
