@@ -25,6 +25,7 @@ class revista(item_biblioteca):
         self.__quant_paginas = entrada_saida.solicitar_cadastro_produto_geral_int("a quantidade de páginas")
         self.set_classificacao_indicativa(entrada_saida.solicitar_cadastro_produto_geral_int("a classificação indicativa"))
         self.set_idioma(entrada_saida.solicitar_cadastro_produto_geral("o idioma"))
+        self.set_tipo("Revista")
 
         validacao.confirmar_cadastro_revista(self,estoque)
 

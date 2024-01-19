@@ -9,7 +9,7 @@ estoque = estoque_produto()
 
 def main():
     match entrada_saida.menu_principal():
-        case 1: #Escolha do tipo de cadastro
+        case 1: #Cadastrar
             match entrada_saida.menu_escolher_tipo_cadastro():
                 case 1: #Escolha de categoria do produto
                     match entrada_saida.menu_escolher_tipo_produto():
@@ -17,17 +17,35 @@ def main():
                             livro_em_andamento = livro()
                             livro_em_andamento.criar_livro(estoque)
                             main()
-                        case 2:
+                        case 2: #Mídia digital
                             midia_em_andamento = midia_digital()
                             midia_em_andamento.criar_midia_digital(estoque)
                             main()
-                        case 3:
+                        case 3: #Revista
                             revista_em_andamento = revista()
                             revista_em_andamento.criar_revista(estoque)
                             main()
-                        case 4:
+                        case 4: #Jogos
                             print
                             #inserir jogos
+        case 2: #Buscar
+            match entrada_saida.menu_buscar():
+                case 1: #Exibir lista geral de produtos
+                    estoque.exibir_lista_produto()
+                    produto_em_busca = estoque.buscar_produto(entrada_saida.solicitar_id_buscar())
+                    
+
+                case 2: #Voltar ao menu principal
+                    main()
+
+                    
+
+
+
+
+
+
+           
 
 
 main()

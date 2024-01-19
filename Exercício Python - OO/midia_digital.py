@@ -27,6 +27,7 @@ class midia_digital(item_biblioteca):
         self.set_idioma(entrada_saida.solicitar_cadastro_produto_geral("o idioma"))
         self.set_tiragem(entrada_saida.solicitar_cadastro_produto_geral_int("a tiragem"))
         self.set_avaliacao_geral(entrada_saida.solicitar_cadastro_produto_geral_float("a avaliação geral"))
+        self.set_tipo("Mídia Digital")
 
         validacao.confirmar_cadastro_midia(self, estoque)
 

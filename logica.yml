@@ -1,0 +1,29 @@
+--- Exibir produtos gerais da biblioteca
+    # 01. Modelo de exibição
+        001- Harry Potter (Livro, Mídia Física)
+        002- Exterminador do Futuro
+
+    # 02. Menu buscar 
+    Selecione uma opção: 
+        [1]- Buscar por ID
+        [2]- Voltar ao menu principal
+
+    # 03. Exibir infos do produto selecionado
+    : * Id: 001
+    : * Título: Harry Potter _Alugar
+    : * Autoria: J. K. Roling
+    : * Ano lançamento: 2002
+    : * Classificação indicativa: 10 +
+    : * Tiragem: 123000
+    : * Avaliação geral: 5.0
+    : * Idioma: PT-BR
+    : * Tipo: Livro
+    : * Disponível nos seguintes formatos: Livro, CD, DVD
+
+    # 04. Menu após exibição 
+        [1]- Alugar este produto
+        [2]- Fazer outra busca
+        [3]- Voltar ao menu principal
+
+  
+

@@ -1,6 +1,6 @@
 class item_biblioteca:
     def __init__(self):
-        self.__id = None
+        self.__id:str = None
         self.__titulo = None
         self.__autoria = None
         self.__ano_lancamento = None
@@ -8,8 +8,14 @@ class item_biblioteca:
         self.__tiragem = None
         self.__avaliacao_geral = None
         self.__idioma = None
-        
+        self.__tipo = None
+
+
 #Getter & Setters
+    def get_tipo(self):
+        return self.__tipo
+    def set_tipo(self, value):
+        self.__tipo = value
     def get_id(self):
         return self.__id
     def set_id(self, value):

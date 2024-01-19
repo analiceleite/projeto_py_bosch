@@ -23,7 +23,6 @@ class livro(item_biblioteca):
         self.__is_best_seller = value
 
     def criar_livro(self,estoque):
-    
         self.set_titulo(entrada_saida.solicitar_cadastro_produto_geral("o titulo"))
         self.__genero = entrada_saida.menu_solicitar_categoria_livro()
         self.set_autoria(entrada_saida.solicitar_cadastro_produto_geral("a autoria"))
@@ -34,6 +33,9 @@ class livro(item_biblioteca):
         self.set_tiragem(entrada_saida.solicitar_cadastro_produto_geral_int("a tiragem")) #Validar número negativo
         self.set_avaliacao_geral(entrada_saida.solicitar_cadastro_produto_geral_float("a avaliação geral"))#Validar número negativo
         self.__is_best_seller = entrada_saida.solicitar_best_seller()
+
+        self.set_tipo("Livro")
+        self.set_id(estoque.atribuir_id())
         
         validacao.confirmar_cadastro_livro(self,estoque)
         

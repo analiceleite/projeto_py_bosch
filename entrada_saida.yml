@@ -17,16 +17,16 @@
         # Inserir campo de confirmação
 -> Buscar - ok
     : * Buscar
-        -> Categoria (filtro)
+        -> ID
         -> Nome
         -> Voltar ao menu principal
 -> Alugar - ok 
-# Pendente validações 
+# Pendente validações
     : * Alugar um Produto
         -> Cliente
         -> Produto
         -> Data de retirada
-        -> Data de devolutiva 
+        -> Data de devolutiva
             : * Ter opção de escolha de tempo
         # Inserir campo de confirmação
             : * Se sim, mostrar quantos dias tem para a devolutiva e o valor da multa em caso de atraso.

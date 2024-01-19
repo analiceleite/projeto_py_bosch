@@ -32,7 +32,6 @@ def menu_escolher_categoria(mensagem):
 #Menus Mídia digital
 def menu_escolher_tipo_produto():
     limpa_tela()
-    print("BOLSONARO PRESIDENTE 22 - É ISSO")
     print("[1]- Livro\n[2]- Mídia digital\n[3]- Revistas\n[4]- Jogos\n[5]- Voltar para o menu principal")
     return retorno_opcao_inteiro()
 
@@ -50,6 +49,7 @@ def solicitar_cadastro_produto_geral_int(mensagem): #alugar/cadastro cliente/pro
                 opcaoValida = True
                 print("Opção inválida")
 
+
 def solicitar_cadastro_produto_geral_float(mensagem): #alugar/cadastro cliente/produtos
         opcaoValida = True
         while opcaoValida:
@@ -57,6 +57,16 @@ def solicitar_cadastro_produto_geral_float(mensagem): #alugar/cadastro cliente/p
                 print("Insira "+mensagem+":")
                 return retorno_opcao_inteiro()#retorno float
             except:
+                opcaoValida = True
+                print("Opção inválida")
+
+def solicitar_id_buscar(): 
+    opcaoValida = True
+    while opcaoValida:
+        try:
+            print("Insira o ID do produto: ")
+            return retorno_opcao_inteiro()
+        except:
                 opcaoValida = True
                 print("Opção inválida")
 
@@ -91,9 +101,9 @@ def menu_solicitar_categoria_midia():
             return "Disco de vinil"
         case 6:
             return "VERIFICAR VOLTA AO MENU"
-        
+ 
 def menu_buscar():
-    print("[1]- Categoria\n[2]- Nome\n[3]- Voltar ao menu principal")
+    print("[1]- Exibir lista geral\n[2]- Voltar ao menu principal")
     return retorno_opcao_inteiro()
 
 def menu_buscar_nome():
@@ -138,3 +148,12 @@ def solicitar_confirmacao_midia(midia_em_cadastro):
 def solicitar_confirmacao_revista(revista_em_cadastro):
     print("Título:",revista_em_cadastro.get_titulo(),"\nVolume/Edição:",revista_em_cadastro.get_volume(),"\nAutoria:",revista_em_cadastro.get_autoria(),"\nAno lançamento:",revista_em_cadastro.get_ano_lancamento(),"\nClassificação indicativa:",revista_em_cadastro.get_classificacao_indicativa(),"+\nIdioma:",revista_em_cadastro.get_idioma())
     return bool_menu_confirmacao()
+
+def exibir_livro_pesquisado(livro_pesquisado):
+    print("Título:",livro_pesquisado.get_titulo(),"\nGênero:",livro_pesquisado.get_genero(),"\nAutoria:",livro_pesquisado.get_autoria(),"\nAno lançamento:",livro_pesquisado.get_ano_lancamento(),"\nQuantidade de páginas:",livro_pesquisado.get_quant_paginas(),"pgs.\nClassificação indicativa:",livro_pesquisado.get_classificacao_indicativa(),"+\nIdioma:",livro_pesquisado.get_idioma()+"\nTiragem:",livro_pesquisado.get_tiragem(),"\nAvaliação:",livro_pesquisado.get_avaliacao_geral(),"\nBest Seller:",livro_pesquisado.get_is_best_seller())
+
+def exibir_midia_digital_pesquisada(midia_digital):
+    print("Título:",midia_digital.get_titulo(),"\nCategoria:",midia_digital.get_categoria(),"\nAutoria:",midia_digital.get_autoria(),"\nAno lançamento:",midia_digital.get_ano_lancamento(),"\nClassificação indicativa:",midia_digital.get_classificacao_indicativa(),"+\nIdioma:",midia_digital.get_idioma()+"\nTiragem:",midia_digital.get_tiragem(),"\nAvaliação:",midia_digital.get_avaliacao_geral())
+
+def exibir_revista_pesquisada(revista_pesquisada):
+    print("Título:",revista_pesquisada.get_titulo(),"\nVolume/Edição:",revista_pesquisada.get_volume(),"\nAutoria:",revista_pesquisada.get_autoria(),"\nAno lançamento:",revista_pesquisada.get_ano_lancamento(),"\nClassificação indicativa:",revista_pesquisada.get_classificacao_indicativa(),"+\nIdioma:",revista_pesquisada.get_idioma())
