@@ -7,7 +7,6 @@ import artes_ascii
 def confirmar_cadastro_livro(livro_em_cadastro,estoque):
     cadastro_nao_cancelado = True
     opcao_invalida = False
-
     while cadastro_nao_cancelado:
         entrada_saida.solicitar_confirmacao_livro(livro_em_cadastro)
         escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_editar,opcao_invalida,26)
@@ -246,7 +245,7 @@ def validar_classificacao_indicativa():
     opcao_invalida = False
     entrada = 5
     while True:
-        classificacao_indicativa = entrada_saida.solicitar_classificacao_indicativa_int("a classificação indicativa", opcao_invalida)
+        classificacao_indicativa = entrada_saida.solicitar_classificacao_indicativa_int("a classificação indicativa", opcao_invalida,14)
         if classificacao_indicativa.isdigit():
             entrada = int(classificacao_indicativa)
             if entrada == 0:
@@ -269,7 +268,7 @@ def validar_avaliacao_produtos(produto, livro):
             art = artes_ascii.titulo_revista_em_andamento
     opcao_invalida = False
     while True:
-        avaliacao_geral = entrada_saida.solicitar_cadastro_livro_float(art,"a avaliação geral", opcao_invalida)
+        avaliacao_geral = entrada_saida.solicitar_cadastro_livro_float(art,"a avaliação geral", opcao_invalida, 14)
         if avaliacao_geral > 5 or avaliacao_geral < 0:
             opcao_invalida = True
         else:
@@ -281,7 +280,7 @@ def validar_avaliacao_produtos(produto, livro):
 def valida_best_seller():
     opcao_invalida = False
     while True:
-        match entrada_saida.solicitar_menu_sim_nao(artes_ascii.menu_sim_não_bestseller,opcao_invalida):
+        match entrada_saida.solicitar_menu_sim_nao(artes_ascii.menu_sim_não_bestseller,opcao_invalida,17):
             case 1:
                 return "Sim"
             case 2:

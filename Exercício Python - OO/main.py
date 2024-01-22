@@ -18,11 +18,11 @@ usuario_em_andamento.set_endereco("Teste")
 lista_usuarios.adicionar_cliente(usuario_em_andamento)
 
 def main():
-    match entrada_saida.menu_principal():
+    match entrada_saida.menu_principal(17, False):
         case 1: #Cadastrar
-            match entrada_saida.menu_escolher_tipo_cadastro():
+            match entrada_saida.menu_escolher_tipo_cadastro(16, False):
                 case 1: #Escolha de categoria do produto
-                    match entrada_saida.menu_escolher_tipo_produto():
+                    match entrada_saida.menu_escolher_tipo_produto(18, False):
                         case 1: #Livro 100%
                             livro_em_andamento = livro()
                             livro_em_andamento.criar_livro(estoque)

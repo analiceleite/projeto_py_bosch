@@ -9,22 +9,22 @@ import time
 #Coleta largura do terminal para utilizar na centralização de texto
 largura_tela = os.get_terminal_size().columns
 
-def obter_entrada_centralizada_string(mensagem,linha):
+def obter_entrada_centralizada_string(mensagem,linha,espac):
     largura_tela, _ = shutil.get_terminal_size()
     coluna_central = (largura_tela - len(mensagem)) // 2
     print(f"\033[{linha};{coluna_central}H{mensagem}", end="")
     coluna_input = coluna_central + len(mensagem)
-    input_posicionado = input(f"\033[{linha};{coluna_input-5}H")
+    input_posicionado = input(f"\033[{linha};{coluna_input-espac}H")
     if (input_posicionado.isalnum):
         return input_posicionado
     return False
 
-def obter_entrada_centralizada_int(mensagem,linha):
+def obter_entrada_centralizada_int(mensagem, linha,espac):
     largura_tela, _ = shutil.get_terminal_size()
     coluna_central = (largura_tela - len(mensagem)) // 2
     print(f"\033[{linha};{coluna_central}H{mensagem}", end="")
     coluna_input = coluna_central + len(mensagem)
-    input_posicionado = input(f"\033[{linha};{coluna_input-5}H")
+    input_posicionado = input(f"\033[{linha};{coluna_input-espac}H")
     if (input_posicionado.isdigit()):
         return int(input_posicionado)
     return False
@@ -66,7 +66,6 @@ def limpa_tela():
 def separa_texto(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        #print('\033[33m'+centralizar_texto(linha, largura_tela)+'\033[0;0m')
         print('\033[33m'+linha.center(largura_tela))
         
 
@@ -94,7 +93,7 @@ def centraliza_insersor(texto):
 def imprime_menu(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print('\033[33m',centralizar_texto(linha, largura_tela),'\033[0;0m')
+        print('\033[33m',centralizar_texto(linha, largura_tela))
 
 #-------------------------------------------------#
         #Método que centraliza texto
@@ -116,52 +115,49 @@ def retorno_opcao_string():
 
 ## ------- MENUS ------- ## 
 #Menu Principal
-def menu_principal(): #Editar formato do input do usuário
-    opcaoInvalida = False
+def menu_principal(linha,opcao_invalida): #Editar formato do input do usuário
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_principal)
-        if (opcaoInvalida):
+        if (opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         imprime_menu(artes_ascii.menu_principal_opcoes) ## Imprime menu de opções
-        opcao_escolha = retorno_opcao_inteiro()
+        opcao_escolha = obter_entrada_centralizada_int("--->     ", linha, 4)
         if (opcao_escolha in (1,2,3,4)): ## Verifica input com quantidade de opções disponíveis
             return opcao_escolha
         else:
-            opcaoInvalida = True
+            opcao_invalida = True
 
 #Menu de opções para tipo de cadastro
-def menu_escolher_tipo_cadastro():
-    opcaoInvalida = False
+def menu_escolher_tipo_cadastro(linha, opcao_invalida):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_escolher_tipo_cadastro)
-        if (opcaoInvalida):
+        if (opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         imprime_menu(artes_ascii.menu_opcoes_cadastro)
-        opcao_escolha = retorno_opcao_inteiro()
-        if (opcao_escolha in (1,2,3)):
-            return opcao_escolha
+        entrada = obter_entrada_centralizada_int("--->     ", linha, 4)
+        if (entrada in (1,2,3)):
+            return entrada
         else:
-            opcaoInvalida = True
+            opcao_invalida = True
 
 #Menu de opções para tipo de cadastro de produto
-def menu_escolher_tipo_produto():
-    opcaoInvalida = False
+def menu_escolher_tipo_produto(linha, opcao_invalida):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_escolher_tipo_produto)
-        if (opcaoInvalida):
+        if (opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         imprime_menu(artes_ascii.menu_escolher_tipo_produto)
-        opcao_escolha = retorno_opcao_inteiro()
-        if (opcao_escolha in (1,2,3,4,5)):
-            return opcao_escolha
+        entrada = obter_entrada_centralizada_int("--->     ", linha, 4)
+        if (entrada in (1,2,3,4,5)):
+            return entrada
         else:
-            opcaoInvalida = True
+            opcao_invalida = True
 
 def menu_item_pesquisado():
     print("[1]- Alugar\n[2]- Buscar outro produto\n[3]- Voltar ao menu principal")
@@ -197,56 +193,49 @@ def solicitar_cadastro_livro_string(titulo, mensagem, opcao_invalida, linha):
             linha += 1
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         centraliza_titulo_menu("\nInsira "+mensagem)
-        entrada = obter_entrada_centralizada_string("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_string("---> ", linha, 0) 
         linha -= 1
         if (entrada):
             return entrada
         opcao_invalida = True
 
-def solicitar_cadastro_livro_int(titulo, mensagem, opcao_invalida):
-    linha = 14
+def solicitar_cadastro_livro_int(titulo, mensagem, opcao_invalida, linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(titulo)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha += 1
         centraliza_titulo_menu("\nInsira "+mensagem)
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_int("---> ",linha, 0)
         if (entrada):
             return entrada
         opcao_invalida = True
-        linha-= 1
 
-def solicitar_cadastro_livro_float(titulo, mensagem, opcao_invalida):
-    linha = 13
+def solicitar_cadastro_livro_float(titulo, mensagem, opcao_invalida, linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(titulo)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 14
         centraliza_titulo_menu("\nInsira "+mensagem)
         entrada = obter_entrada_centralizada_float("\033[33m"+"---> ",linha) 
         if (entrada):
             return entrada
         opcao_invalida = True
 
-def solicitar_categoria_livro():
+def solicitar_categoria_livro(linha,opcao_invalida):
     opcao_invalida = False
-    linha = 20
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
         if (opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            #linha = 21
         centraliza_titulo_menu("\nEscolha o gênero do livro")
         imprime_menu(artes_ascii.menu_escolher_categoria_livro)
-        match obter_entrada_centralizada_int("\033[33m"+"---> ",linha):
+        match obter_entrada_centralizada_int("---> ", linha, 0):
             case 1:
                 return "Ação"
             case 2:
@@ -293,31 +282,26 @@ def solicitar_ano_livro_int(titulo,mensagem,opcao_invalida,linha):
         centraliza_titulo_menu(titulo)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha += 1
         centraliza_titulo_menu("\nInsira "+mensagem)
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_int("---> ",linha, 0) 
         if (entrada):
             return entrada
-        linha -= 1
         opcao_invalida = True
 
-def solicitar_classificacao_indicativa_int(mensagem,opcao_invalida):
-    linha = 14
+def solicitar_classificacao_indicativa_int(mensagem, opcao_invalida, linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            #linha = 14
         centraliza_titulo_menu("\nInsira "+mensagem)
-        entrada = obter_entrada_centralizada_string("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_string("---> ",linha, 0) 
         if (entrada):
             return entrada
         opcao_invalida = True
 
-def solicitar_menu_sim_nao(mensagem, opcao_invalida):
-    linha = 15
+def solicitar_menu_sim_nao(mensagem, opcao_invalida,linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
@@ -325,9 +309,8 @@ def solicitar_menu_sim_nao(mensagem, opcao_invalida):
         centraliza_titulo_menu(artes_ascii.titulo_best_seller)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 17
         centraliza_titulo_menu(mensagem)
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_int("---> ", linha, 0) 
         if (entrada):
             return entrada
         opcao_invalida = True
@@ -338,7 +321,7 @@ def solicitar_menu_sim_nao_editar(mensagem, opcao_invalida,linha):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
             linha+=1
         centraliza_titulo_menu(mensagem)
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
+        entrada = obter_entrada_centralizada_int("---> ",linha, 0) 
         linha-=1
         if (entrada):
             return entrada
