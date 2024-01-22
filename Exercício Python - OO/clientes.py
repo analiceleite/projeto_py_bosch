@@ -1,5 +1,6 @@
 import entrada_saida
 import validacao
+import artes_ascii
 
 class clientes:
     def __init__(self):
@@ -26,9 +27,10 @@ class clientes:
         self.__telefone = value
 
     def criar_usuario(self, lista_usuarios):
-        self.set_nome(entrada_saida.solicitar_cadastro_livro_string("o nome", False))
+        art = artes_ascii.titulo_cliente_em_andamento
+        self.set_nome(entrada_saida.solicitar_cadastro_livro_string(art,"o nome", False,14))
         self.set_rg(validacao.valida_rg_cliente())
-        self.set_telefone(entrada_saida.solicitar_cadastro_livro_int("telefone", False))
-        self.set_endereco(entrada_saida.solicitar_cadastro_livro_string("endereço", False))
+        self.set_telefone(validacao.valida_telefone_cliente())
+        self.set_endereco(entrada_saida.solicitar_cadastro_livro_string(art,"endereço", False,14))
 
         validacao.confirmar_cadastro_cliente(self, lista_usuarios)

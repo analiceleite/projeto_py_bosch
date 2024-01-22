@@ -28,7 +28,7 @@ class revista(item_biblioteca):
         self.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo",False,14))
         self.__volume = entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False)
         self.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a editora",False,14))
-        self.set_ano_lancamento(validacao.validar_ano_lancamento())
+        self.set_ano_lancamento(validacao.validar_ano_lancamento(3))
         self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False)
         self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa())
         self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))

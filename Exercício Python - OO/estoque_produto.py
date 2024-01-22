@@ -31,7 +31,24 @@ class estoque_produto:
         for produto in self.__lista_produto_alugado:
             print(produto.get_titulo())
             #print(produto.get_dono().get_nome())# Método para acessar o nome do dono
-        
+    
+    def opcao_menu_busca(quant_estoque):
+        return entrada_saida.menu_buscar(quant_estoque,False)
+    
+    def exibir_lista_geral(estoque,lista_usuarios):
+        operacao_nao_cancelada = True
+        while operacao_nao_cancelada:
+            produto_em_busca = estoque.exibir_lista_produto()
+            produto_localizado = estoque.buscar_produto(produto_em_busca)
+            if (produto_localizado):
+                match entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_busca_encontrado, False, 26):
+                    case 1: #Alugar
+                        estoque.alugar_produto(produto_em_busca,lista_usuarios,estoque)
+                        break
+                    case 2: #Buscar outro produto
+                        pass
+                    case 3: #Voltar ao menu principal
+                        break
         
 
     def atribuir_id(self):
@@ -42,9 +59,17 @@ class estoque_produto:
         return id
 
     def exibir_lista_produto(self):
-        print("\nLista geral de produtos:")
+        cont = 1
+        lista = ""
         for produto in self.__lista_produto:
-            print(produto.get_id(),"- "+produto.get_titulo(),sep="") #Implementar (Livro, mídia digital)
+            lista += str(produto.get_id()) + "- " + str(produto.get_titulo()) + " ("+str(produto.get_tipo())+")\n"
+            cont+=1
+            #print(produto.get_id(),"- "+produto.get_titulo(),sep="") #Implementar (Livro, mídia digital)
+        escolhido = entrada_saida.exibir_lista_geral_produtos(False,lista,cont)
+        if escolhido > produto.get_id():
+            return False
+        else:
+            return escolhido
 
     def buscar_produto(self, id):
         for produto in self.__lista_produto:

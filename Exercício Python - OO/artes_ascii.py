@@ -9,6 +9,7 @@ nome_biblioteca = """
 #separa_texto("--------------------------------------------------------")
 opcao_invalida = "\n                   >> Opção Inválida <<                  "
 titulo_principal = "                 >>> MENU PRINCIPAL <<<                 "
+titulo_busca = "                   >>> MENU BUSCA <<<                   "
 
 titulo_escolher_tipo_cadastro = "           >>> ESCOLHA O TIPO DE CADASTRO <<<           "
 titulo_escolher_tipo_produto = "           >>> ESCOLHA O TIPO DO PRODUTO <<<            "
@@ -18,6 +19,7 @@ titulo_revista_em_andamento = "              >>> CADASTRANDO REVISTA <<<        
 titulo_jogos_em_andamento = "               >>> CADASTRANDO JOGOS <<<                "
 titulo_cliente_em_andamento = "              >>> CADASTRANDO CLIENTE <<<               "
 titulo_confirmar_cadastro = "              >>> CONFIRMAR CADASTRO <<<                "
+titulo_confirmar_cadastro = "            >>> LISTA GERAL DOS PRODUTOS <<<            "
 titulo_editar_informacao = "\n          Selecione a informação a ser editada          "
 titulo_best_seller = "\n              Este livro é um best seller?              "
 
@@ -57,7 +59,15 @@ menu_escolher_categoria_midia = """
      [5]- Disco de Vinil  
 """
 
-
+menu_busca = """
+[1]- Exibir lista geral
+     [2]- Voltar ao menu principal
+"""
+menu_busca_encontrado = """
+[1]- Alugar
+             [2]- Buscar outro produto
+                 [3]- Voltar ao menu principal
+"""
 menu_sim_não_bestseller = """
  [1]- Sim 
  [2]- Não

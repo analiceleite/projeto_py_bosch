@@ -34,12 +34,12 @@ class livro(item_biblioteca):
         self.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art, "o titulo", False, 14)) #-- Finalizado    
         self.__genero = entrada_saida.solicitar_categoria_livro() #-- Finalizado
         self.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a autoria", False, 14)) #-- Finalizado
-        self.set_ano_lancamento(validacao.validar_ano_lancamento()) #-- Finalizado
+        self.set_ano_lancamento(validacao.validar_ano_lancamento(1)) #-- Finalizado
         self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas", False) #--Finalizado
         self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa()) #-- Finalizado
         self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma", False, 14)) #-- Finalizado
         self.set_tiragem(entrada_saida.solicitar_cadastro_livro_int(art,"a tiragem", False)) #-- Finalizado
-        self.set_avaliacao_geral(validacao.validar_avaliacao_produtos(self)) #-- Finalizado
+        self.set_avaliacao_geral(validacao.validar_avaliacao_produtos(1,self)) #-- Finalizado
         self.__is_best_seller = validacao.valida_best_seller() #-- Em andamento
         self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False))
         self.set_locatario(None)

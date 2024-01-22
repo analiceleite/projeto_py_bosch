@@ -7,6 +7,7 @@ import artes_ascii
 def confirmar_cadastro_livro(livro_em_cadastro,estoque):
     cadastro_nao_cancelado = True
     opcao_invalida = False
+
     while cadastro_nao_cancelado:
         entrada_saida.solicitar_confirmacao_livro(livro_em_cadastro)
         escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_editar,opcao_invalida,26)
@@ -14,12 +15,12 @@ def confirmar_cadastro_livro(livro_em_cadastro,estoque):
             match escolha:
                 case 1:
                     estoque.add_lista_produto(livro_em_cadastro)#Adiciona apenas uma amostra para exibir na lista de disponíveis
+                    cadastro_nao_cancelado = False
                     return True
                 case 2:
                     cadastro_nao_cancelado = False
                 case 3:
-                    return verificar_edicao_livro(livro_em_cadastro, estoque)
-                    
+                    verificar_edicao_livro(livro_em_cadastro, estoque)
         else:
             opcao_invalida = True
 
@@ -51,12 +52,8 @@ def verificar_edicao_livro(livro_em_cadastro, estoque):
                 livro_em_cadastro.set_is_best_seller(valida_best_seller())
             case 11:
                 livro_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False))
-        match confirmar_cadastro_livro(livro_em_cadastro, estoque):
-            case 1:
-                operacao_rodando = False
-            case 2:
-                break
-    return livro_em_cadastro
+        operacao_rodando = False
+
     
 def confirmar_cadastro_midia(midia_em_cadastro, estoque):
     cadastro_nao_cancelado = True
@@ -72,7 +69,7 @@ def confirmar_cadastro_midia(midia_em_cadastro, estoque):
                 case 2:
                     cadastro_nao_cancelado = False
                 case 3:
-                    return verificar_edicao_midia(midia_em_cadastro, estoque)
+                    verificar_edicao_midia(midia_em_cadastro, estoque)
                     
         else:
             opcao_invalida = True
@@ -101,12 +98,7 @@ def verificar_edicao_midia(midia_em_cadastro, estoque):
                 midia_em_cadastro.set_avaliacao_geral(validar_avaliacao_produtos(midia_em_cadastro))
             case 9:
                 midia_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False,14))
-        match confirmar_cadastro_midia(midia_em_cadastro, estoque):
-            case 1:
-                operacao_rodando = False
-            case 2:
-                break
-    return midia_em_cadastro
+        operacao_rodando = False
 
 def confirmar_cadastro_revista(revista_em_cadastro, estoque):
     cadastro_nao_cancelado = True
@@ -122,8 +114,7 @@ def confirmar_cadastro_revista(revista_em_cadastro, estoque):
                 case 2:
                     cadastro_nao_cancelado = False
                 case 3:
-                    return verificar_edicao_revista(revista_em_cadastro, estoque)
-                    
+                    verificar_edicao_revista(revista_em_cadastro, estoque)
         else:
             opcao_invalida = True
 
@@ -149,30 +140,23 @@ def verificar_edicao_revista(revista_em_cadastro, estoque):
                 revista_em_cadastro.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))
             case 8:
                 revista_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False))
-        match confirmar_cadastro_revista(revista_em_cadastro, estoque):
-            case 1:
-                operacao_rodando = False
-            case 2:
-                break
-    return revista_em_cadastro
+        operacao_rodando = False
 
-def verificar_edicao_cliente(cliente_em_cadastro,lista_usuarios):
+def verificar_edicao_cliente(cliente_em_cadastro):
     opcao_invalida = False
-    while True:
+    operacao_rodando = True
+    art = artes_ascii.titulo_cliente_em_andamento
+    while operacao_rodando:
         match entrada_saida.solicitar_menu_edicao(artes_ascii.titulo_cliente_em_andamento, artes_ascii.menu_edicao_cliente,opcao_invalida, 18):
             case 1:
-                cliente_em_cadastro.set_nome(entrada_saida.solicitar_cadastro_livro_string("o nome"))
+                cliente_em_cadastro.set_nome(entrada_saida.solicitar_cadastro_livro_string(art,"o nome",False,14))
             case 2:
-                cliente_em_cadastro.set_rg(entrada_saida.solicitar_cadastro_livro_int("RG"))
+                cliente_em_cadastro.set_rg(valida_rg_cliente())
             case 3:
-                cliente_em_cadastro.set_telefone(entrada_saida.solicitar_cadastro_livro_int("telefone"))
+                cliente_em_cadastro.set_telefone(valida_telefone_cliente())
             case 4:
-                cliente_em_cadastro.set_endereco(entrada_saida.solicitar_cadastro_livro_string("endereço"))
-        match confirmar_cadastro_cliente(cliente_em_cadastro,lista_usuarios):
-            case 1:
-                return cliente_em_cadastro
-            case 2:
-                break
+                cliente_em_cadastro.set_endereco(entrada_saida.solicitar_cadastro_livro_string(art,"endereço",False,14))
+        operacao_rodando = False
 def confirmar_cadastro_jogos():
     print
 
@@ -186,11 +170,12 @@ def confirmar_cadastro_cliente(cliente_em_cadastro, lista_usuarios):
             match escolha:
                 case 1:
                     lista_usuarios.adicionar_cliente(cliente_em_cadastro)
+                    cadastro_nao_cancelado = False
                     return True
                 case 2:
                     cadastro_nao_cancelado = False
                 case 3:
-                    return verificar_edicao_cliente(cliente_em_cadastro,lista_usuarios)
+                    verificar_edicao_cliente(cliente_em_cadastro)
     
 def confirmar_aluguel(cliente, produto, tempo_aluguel, estoque):
     if (entrada_saida.confirmar_aluguel(cliente, produto, tempo_aluguel)):
@@ -201,15 +186,27 @@ def confirmar_aluguel(cliente, produto, tempo_aluguel, estoque):
 def valida_rg_cliente():
     rg = ""
     opcao_invalida = False
+    art = artes_ascii.titulo_cliente_em_andamento
     while True:
-        rg = entrada_saida.solicitar_cadastro_livro_string("o RG", opcao_invalida)
+        rg = entrada_saida.solicitar_cadastro_livro_string(art,"o RG", opcao_invalida,14)
         if len(rg) != 7 or not rg.isdigit():
             opcao_invalida = True
         else:
             rg_formatado = f"{rg[0]}.{'.'.join([rg[i:i+3] for i in range(1, 7, 3)])}"
             return rg_formatado
 
-
+def valida_telefone_cliente():
+    telefone = ""
+    opcao_invalida = False
+    art = artes_ascii.titulo_cliente_em_andamento
+    while True:
+        telefone = entrada_saida.solicitar_cadastro_livro_string(art,"telefone", opcao_invalida,14)
+        if len(telefone) != 11 or not telefone.isdigit():
+            opcao_invalida = True
+        else:
+            telefone_formatado = f"({telefone[:2]}) {telefone[2]} {telefone[3:7]}-{telefone[7:]}"
+            return telefone_formatado
+    
 def confirmar_tempo_aluguel():
     match entrada_saida.solicitar_tempo_aluguel():
         case 1:
@@ -229,10 +226,17 @@ def validar_exibicao_busca(produto):
     else:
         entrada_saida.exibir_midia_digital_pesquisada(produto)
 
-def validar_ano_lancamento():
+def validar_ano_lancamento(produto):
+    match produto:
+        case 1:
+            art = artes_ascii.titulo_livro_em_andamento
+        case 2:
+            art = artes_ascii.titulo_midia_em_andamento
+        case 3:
+            art = artes_ascii.titulo_revista_em_andamento
     opcao_invalida = False
     while True:
-        ano = entrada_saida.solicitar_ano_livro_int("o ano de lançamento",opcao_invalida,14)
+        ano = entrada_saida.solicitar_ano_livro_int(art,"o ano de lançamento",opcao_invalida,14)
         if ano > 1000 and ano <= 2024:
             return ano
         else:
@@ -255,10 +259,17 @@ def validar_classificacao_indicativa():
             return "Livre"
         opcao_invalida = True
 
-def validar_avaliacao_produtos(livro):
+def validar_avaliacao_produtos(produto, livro):
+    match produto:
+        case 1:
+            art = artes_ascii.titulo_livro_em_andamento
+        case 2:
+            art = artes_ascii.titulo_midia_em_andamento
+        case 3:
+            art = artes_ascii.titulo_revista_em_andamento
     opcao_invalida = False
     while True:
-        avaliacao_geral = entrada_saida.solicitar_cadastro_livro_float("a avaliação geral", opcao_invalida)
+        avaliacao_geral = entrada_saida.solicitar_cadastro_livro_float(art,"a avaliação geral", opcao_invalida)
         if avaliacao_geral > 5 or avaliacao_geral < 0:
             opcao_invalida = True
         else:

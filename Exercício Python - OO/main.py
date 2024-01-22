@@ -9,6 +9,7 @@ from clientes import clientes
 
 estoque = estoque_produto()
 lista_usuarios = gestao_clientes()
+livrinho = livro()
 usuario_em_andamento = clientes()
 usuario_em_andamento.set_nome("Admin")
 usuario_em_andamento.set_rg("1234")
@@ -22,19 +23,19 @@ def main():
             match entrada_saida.menu_escolher_tipo_cadastro():
                 case 1: #Escolha de categoria do produto
                     match entrada_saida.menu_escolher_tipo_produto():
-                        case 1: #Livro
+                        case 1: #Livro 100%
                             livro_em_andamento = livro()
                             livro_em_andamento.criar_livro(estoque)
                             main()
-                        case 2: #Mídia digital
+                        case 2: #Mídia digital 100%
                             midia_em_andamento = midia_digital()
                             midia_em_andamento.criar_midia_digital(estoque)
                             main()
-                        case 3: #Revista
+                        case 3: #Revista 100%
                             revista_em_andamento = revista()
                             revista_em_andamento.criar_revista(estoque)
                             main()
-                        case 4: #Jogos
+                        case 4: #Jogos...
                             print
                             #Inserir jogos
                         case 5:
@@ -46,22 +47,10 @@ def main():
 
 
         case 2: #Buscar
-            match entrada_saida.menu_buscar():
+            match estoque_produto.opcao_menu_busca(len(estoque.get_lista_produto())):
                 case 1: #Exibir lista geral de produtos
-                    while True:
-                        estoque.exibir_lista_produto()
-                        produto_em_busca = estoque.buscar_produto(entrada_saida.solicitar_id_buscar())
-                        match entrada_saida.menu_item_pesquisado():
-                            case 1: #Alugar
-                                estoque.alugar_produto(produto_em_busca,lista_usuarios,estoque)
-                                break
-                            case 2: #Buscar outro produto
-                                pass
-                            case 3: #Voltar ao menu principal
-                                main()
-                                
-
-                case 2: #Voltar ao menu principal
+                    estoque_produto.exibir_lista_geral(estoque,lista_usuarios)
+                case _:
                     main()
 
                     

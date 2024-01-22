@@ -4,6 +4,7 @@ from revista import revista
 import os
 import artes_ascii
 import shutil
+import time
 
 #Coleta largura do terminal para utilizar na centralização de texto
 largura_tela = os.get_terminal_size().columns
@@ -66,7 +67,7 @@ def separa_texto(texto):
     linhas = texto.split('\n')
     for linha in linhas:
         #print('\033[33m'+centralizar_texto(linha, largura_tela)+'\033[0;0m')
-        print('\033[33m'+linha.center(largura_tela)+'\033[0;0m')
+        print('\033[33m'+linha.center(largura_tela))
         
 
 def separa_confirmacao_livro(texto):
@@ -78,12 +79,12 @@ def separa_confirmacao_livro(texto):
 def centraliza_titulo_menu(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print('\033[33m'+'\033[1m'+linha.center(largura_tela)+'\033[0;0m')
+        print('\033[33m'+'\033[1m'+linha.center(largura_tela))
 
 def centraliza_opcao_invalida(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print('\033[33m'+'\033[31m'+linha.center(largura_tela)+'\033[0;0m')
+        print('\033[33m'+'\033[31m'+linha.center(largura_tela))
 
 def centraliza_insersor(texto):
     linhas = texto.split()
@@ -173,13 +174,6 @@ def solicitar_rg_aluguel(): #Solicita RG do cliente no momento do aluguel do pro
 ## solicitar_tempo_aluguel
 #def solicitar_confirmacao_aluguel(produto, cliente):
 #    print("D")
-
-
-def menu_escolher_categoria(mensagem):
-    print("[1]- Livro\n[2]- CD\n[3]- DVD\n[4]- Disco de vinil\n[5]- Blu-Ray\n[6]- Voltar ao menu "+mensagem)
-    return retorno_opcao_inteiro()
-#Menus Jogos
-
 #Menus Mídia digital
 
 ## ------- SOLICITAÇÕES ------- ## 
@@ -214,12 +208,12 @@ def solicitar_cadastro_livro_int(titulo, mensagem, opcao_invalida):
         opcao_invalida = True
         linha-= 1
 
-def solicitar_cadastro_livro_float(mensagem, opcao_invalida):
+def solicitar_cadastro_livro_float(titulo, mensagem, opcao_invalida):
     linha = 13
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
-        centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
+        centraliza_titulo_menu(titulo)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
             linha = 14
@@ -281,11 +275,11 @@ def solicitar_categoria_midia():
             case _:
                 opcao_invalida = True
 
-def solicitar_ano_livro_int(mensagem,opcao_invalida,linha):
+def solicitar_ano_livro_int(titulo,mensagem,opcao_invalida,linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
-        centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
+        centraliza_titulo_menu(titulo)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
             linha += 1
@@ -428,20 +422,30 @@ def menu_solicitar_categoria_midia():
         case 6:
             return "VERIFICAR VOLTA AO MENU"
  
-def menu_buscar():
-    print("[1]- Exibir lista geral\n[2]- Voltar ao menu principal")
-    return retorno_opcao_inteiro()
-
-def menu_buscar_nome():
-    return input("Insira o nome do item desejado: ")
+def menu_buscar(quant_estoque, opcao_invalida):
+    if quant_estoque > 0:        
+        while True:
+            limpa_tela()
+            separa_texto(artes_ascii.nome_biblioteca)
+            centraliza_titulo_menu(artes_ascii.titulo_busca)
+            if (opcao_invalida):
+                centraliza_opcao_invalida(artes_ascii.opcao_invalida)
+            imprime_menu(artes_ascii.menu_busca)
+            entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",quant_estoque+16) 
+            if (entrada in (1,2)): ## Verifica input com quantidade de opções disponíveis
+                return entrada
+            opcao_invalida = True
+    else:
+        limpa_tela()
+        separa_texto(artes_ascii.nome_biblioteca)
+        centraliza_titulo_menu(artes_ascii.titulo_busca)
+        print(centralizar_texto("Não existem itens cadastrados",largura_tela))
+        print(centralizar_texto("Voltando ao menu", largura_tela))
+        time.sleep(2)
+        return False
 
 def menu_escolher_tempo():
     print("[1]- 7 dias\n[2]- 14 dias\n[3]- 21 dias\n[4]- 28 dias")
-    return retorno_opcao_inteiro()
-
-#Solicita dados para cadastro de produtos
-def solicitar_best_seller():
-    print("Este livro é um best seller?\n[1]- Sim\n[2]- Não")
     return retorno_opcao_inteiro()
 
 def bool_menu_confirmacao():
@@ -494,8 +498,28 @@ def solicitar_confirmacao_cliente(cliente_em_cadastro):
     detalhes_cliente = artes_ascii.confirmacao_cliente(cliente_em_cadastro)
     separa_confirmacao_livro(detalhes_cliente)
 
+def exibir_lista_geral_produtos(opcao_invalida, lista,cont):
+    linha = cont+10
+    limpa_tela()
+    separa_texto(artes_ascii.nome_biblioteca)
+    if(opcao_invalida):
+        centraliza_opcao_invalida(artes_ascii.opcao_invalida)
+        linha += 1
+    separa_texto(lista)
+    print(centralizar_texto("Insira o ID do produto:",largura_tela))
+    entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha)
+    linha -= 1
+    if (entrada):
+        return entrada
+    opcao_invalida = True
+    
+    
+
 def exibir_livro_pesquisado(livro_pesquisado):
-    print("Título:",livro_pesquisado.get_titulo(),"\nGênero:",livro_pesquisado.get_genero(),"\nAutoria:",livro_pesquisado.get_autoria(),"\nAno lançamento:",livro_pesquisado.get_ano_lancamento(),"\nQuantidade de páginas:",livro_pesquisado.get_quant_paginas(),"pgs.\nClassificação indicativa:",livro_pesquisado.get_classificacao_indicativa(),"+\nIdioma:",livro_pesquisado.get_idioma()+"\nTiragem:",livro_pesquisado.get_tiragem(),"\nAvaliação:",livro_pesquisado.get_avaliacao_geral(),"\nBest Seller:",livro_pesquisado.get_is_best_seller())
+    limpa_tela()
+    separa_texto(artes_ascii.nome_biblioteca)
+    detalhes_livro = artes_ascii.confirmacao_livro(livro_pesquisado)
+    separa_confirmacao_livro(detalhes_livro)
 
 def exibir_midia_digital_pesquisada(midia_digital):
     print("Título:",midia_digital.get_titulo(),"\nCategoria:",midia_digital.get_categoria(),"\nAutoria:",midia_digital.get_autoria(),"\nAno lançamento:",midia_digital.get_ano_lancamento(),"\nClassificação indicativa:",midia_digital.get_classificacao_indicativa(),"+\nIdioma:",midia_digital.get_idioma()+"\nTiragem:",midia_digital.get_tiragem(),"\nAvaliação:",midia_digital.get_avaliacao_geral())
