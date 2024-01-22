@@ -90,6 +90,16 @@ menu_edicao_midia = """
 [8]- Avaliação  
            [9]- Quantidade disponível
 """
+menu_edicao_revista = """
+[1]- Título     
+[2]- Volume     
+[3]- Autoria   
+      [4]- Ano de lançamento
+          [5]- Quantidade de páginas
+             [6]- Classificação Indicativa
+[7]- Idioma     
+           [8]- Quantidade disponível
+"""
 def confirmacao_livro(livro):
     detalhes_livro = (
     f"\nTítulo: {livro.get_titulo()}\n"
@@ -102,7 +112,7 @@ def confirmacao_livro(livro):
     f"Tiragem: {livro.get_tiragem():,} cópias\n"
     f"Avaliação: {livro.get_avaliacao_geral()}\n"
     f"Best Seller: {livro.get_is_best_seller()}\n"
-    f"Quantidade disponível: {livro.get_quantidade_disponivel()}"
+    f"Quantidade disponível: {livro.get_quantidade_disponivel():,}"
     )
     return detalhes_livro
 
@@ -116,6 +126,19 @@ def confirmacao_midia(midia):
     f"Idioma: {midia.get_idioma()}\n"
     f"Tiragem: {midia.get_tiragem():,} cópia(s)\n"
     f"Avaliação: {midia.get_avaliacao_geral()}\n"
-    f"Quantidade disponível: {midia.get_quantidade_disponivel()}"
+    f"Quantidade disponível: {midia.get_quantidade_disponivel():,}"
     )
     return detalhes_midia
+
+def confirmacao_revista(revista):
+    detalhes_revista = (
+    f"\nTítulo: {revista.get_titulo()}\n"
+    f"Volume/Edição: {revista.get_volume()}\n"
+    f"Autoria: {revista.get_autoria()}\n"
+    f"Ano lançamento: {revista.get_ano_lancamento()}\n"
+    f"Quantidade de páginas: {revista.get_quant_paginas():,} pgs.\n"
+    f"Classificação indicativa: {revista.get_classificacao_indicativa()}+\n"
+    f"Idioma: {revista.get_idioma()}\n"
+    f"Quantidade disponível: {revista.get_quantidade_disponivel():,}"
+    )
+    return detalhes_revista

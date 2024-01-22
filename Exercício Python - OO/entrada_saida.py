@@ -486,8 +486,11 @@ def solicitar_confirmacao_midia(midia_em_cadastro):
     separa_confirmacao_livro(detalhes_midia)
 
 def solicitar_confirmacao_revista(revista_em_cadastro):
-    print("Título:",revista_em_cadastro.get_titulo(),"\nVolume/Edição:",revista_em_cadastro.get_volume(),"\nAutoria:",revista_em_cadastro.get_autoria(),"\nAno lançamento:",revista_em_cadastro.get_ano_lancamento(),"\nClassificação indicativa:",revista_em_cadastro.get_classificacao_indicativa(),"+\nIdioma:",revista_em_cadastro.get_idioma())
-    return bool_menu_confirmacao()
+    limpa_tela()
+    separa_texto(artes_ascii.nome_biblioteca)
+    centraliza_titulo_menu(artes_ascii.titulo_confirmar_cadastro)
+    detalhes_revista = artes_ascii.confirmacao_revista(revista_em_cadastro)
+    separa_confirmacao_livro(detalhes_revista)
 
 def exibir_livro_pesquisado(livro_pesquisado):
     print("Título:",livro_pesquisado.get_titulo(),"\nGênero:",livro_pesquisado.get_genero(),"\nAutoria:",livro_pesquisado.get_autoria(),"\nAno lançamento:",livro_pesquisado.get_ano_lancamento(),"\nQuantidade de páginas:",livro_pesquisado.get_quant_paginas(),"pgs.\nClassificação indicativa:",livro_pesquisado.get_classificacao_indicativa(),"+\nIdioma:",livro_pesquisado.get_idioma()+"\nTiragem:",livro_pesquisado.get_tiragem(),"\nAvaliação:",livro_pesquisado.get_avaliacao_geral(),"\nBest Seller:",livro_pesquisado.get_is_best_seller())

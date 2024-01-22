@@ -24,21 +24,21 @@ class revista(item_biblioteca):
 
     def criar_revista(self, estoque):
         i = 0
-        self.set_titulo(entrada_saida.solicitar_cadastro_produto_geral("o titulo"))
-        self.__volume = entrada_saida.solicitar_cadastro_produto_geral_int("o volume/edição")
-        self.set_autoria(entrada_saida.solicitar_cadastro_produto_geral("a editora"))
-        self.set_ano_lancamento(entrada_saida.solicitar_cadastro_produto_geral_int("o ano de lançamento"))
-        self.__quant_paginas = entrada_saida.solicitar_cadastro_produto_geral_int("a quantidade de páginas")
-        self.set_classificacao_indicativa(entrada_saida.solicitar_cadastro_produto_geral_int("a classificação indicativa"))
-        self.set_idioma(entrada_saida.solicitar_cadastro_produto_geral("o idioma"))
-        self.__quantidade_disponível = entrada_saida.solicitar_quantidade_disponivel()
+        self.set_titulo(entrada_saida.solicitar_cadastro_livro_string("o titulo"))
+        self.__volume = entrada_saida.solicitar_cadastro_livro_int("o volume/edição")
+        self.set_autoria(entrada_saida.solicitar_cadastro_livro_string("a editora"))
+        self.set_ano_lancamento(validacao.validar_ano_lancamento())
+        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int("a quantidade de páginas")
+        self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa())
+        self.set_idioma(entrada_saida.solicitar_cadastro_livro_string("o idioma"))
+        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int("a quantidade disponível"))
         self.set_locatario(None)
         self.set_tempo_aluguel(None)
         self.set_tipo("Revista")
         self.set_id(estoque.atribuir_id())
 
         if(validacao.confirmar_cadastro_revista(self,estoque)):
-            while (i < self.__quantidade_disponível):
+            while (i < self.get_quantidade_disponivel):
                 self.add_lista_revista()
                 i += 1
 

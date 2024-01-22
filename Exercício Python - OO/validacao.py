@@ -106,11 +106,50 @@ def verificar_edicao_midia(midia_em_cadastro, estoque):
 
 
 def confirmar_cadastro_revista(revista_em_cadastro, estoque):
-    if(entrada_saida.solicitar_confirmacao_revista(revista_em_cadastro)):
-        estoque.add_lista_produto(revista_em_cadastro)#Adiciona apenas uma amostra no estoque
-        return True
-    else:
-        entrada_saida.imprime_cadastro_cancelado()
+    cadastro_nao_cancelado = True
+    opcao_invalida = False
+    while cadastro_nao_cancelado:
+        entrada_saida.solicitar_confirmacao_revista(revista_em_cadastro)
+        escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_editar,opcao_invalida,26)
+        if escolha in (1,2,3):
+            match escolha:
+                case 1:
+                    estoque.add_lista_produto(revista_em_cadastro)#Adiciona apenas uma amostra para exibir na lista de disponíveis
+                    return True
+                case 2:
+                    cadastro_nao_cancelado = False
+                case 3:
+                    return verificar_edicao_revista(revista_em_cadastro, estoque)
+                    
+        else:
+            opcao_invalida = True
+
+def verificar_edicao_revista(revista_em_cadastro, estoque):
+    opcao_invalida = False
+    i = 0
+    while True:
+        match entrada_saida.solicitar_menu_edicao(artes_ascii.titulo_revista_em_andamento,artes_ascii.menu_edicao_revista, opcao_invalida, 25):
+            case 1:
+                revista_em_cadastro.set_titulo(entrada_saida.solicitar_cadastro_livro_string("o titulo"))                
+            case 2:
+                revista_em_cadastro.set_volume(entrada_saida.solicitar_cadastro_livro_int("o volume/edição"))
+            case 3:
+                revista_em_cadastro.set_autoria(entrada_saida.solicitar_cadastro_livro_string("a autoria"))
+            case 4:
+                revista_em_cadastro.set_ano_lancamento(validar_ano_lancamento())
+            case 5:
+                revista_em_cadastro.set_quant_paginas(entrada_saida.solicitar_cadastro_livro_int("a quantidade de páginas"))
+            case 6:
+                revista_em_cadastro.set_classificacao_indicativa(validar_classificacao_indicativa())
+            case 7:
+                revista_em_cadastro.set_idioma(entrada_saida.solicitar_cadastro_livro_string("o idioma"))
+            case 8:
+                revista_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int("a quantidade disponível"))
+        match confirmar_cadastro_revista(revista_em_cadastro, estoque):
+            case 1:
+                return revista_em_cadastro
+            case 2:
+                break
 
 def confirmar_cadastro_jogos():
     print
