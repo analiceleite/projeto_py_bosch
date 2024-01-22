@@ -4,11 +4,9 @@ from revista import revista
 import os
 import artes_ascii
 import shutil
+
 #Coleta largura do terminal para utilizar na centralização de texto
 largura_tela = os.get_terminal_size().columns
-
-
-
 
 def obter_entrada_centralizada_string(mensagem,linha):
     largura_tela, _ = shutil.get_terminal_size()
