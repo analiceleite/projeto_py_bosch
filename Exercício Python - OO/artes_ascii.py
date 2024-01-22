@@ -14,6 +14,7 @@ titulo_busca = "                   >>> MENU BUSCA <<<                   "
 titulo_escolher_tipo_cadastro = "           >>> ESCOLHA O TIPO DE CADASTRO <<<           "
 titulo_escolher_tipo_produto = "           >>> ESCOLHA O TIPO DO PRODUTO <<<            "
 titulo_livro_em_andamento = "               >>> CADASTRANDO LIVRO <<<                "
+titulo_livro_em_locacao = "                 >>> ALUGANDO LIVRO <<<                  "
 titulo_midia_em_andamento = "            >>> CADASTRANDO MÍDIA DIGITAL <<<           "
 titulo_revista_em_andamento = "              >>> CADASTRANDO REVISTA <<<               "
 titulo_jogos_em_andamento = "               >>> CADASTRANDO JOGOS <<<                "
@@ -164,7 +165,8 @@ def confirmacao_revista(revista):
 def confirmacao_cliente(cliente):
     detalhes_cliente = (
     f"\nNome: {cliente.get_nome()}\n"
-    f"RG: {cliente.get_rg()}\n"
+    f"{cliente.get_rg()[0]}.{'.'.join([cliente.get_rg()[i:i+3] for i in range(1, 7, 3)])}\n"
+    #f"RG: {cliente.get_rg()}\n"
     f"Telefone: {cliente.get_telefone()}\n"
     f"Endereço: {cliente.get_endereco()}"
     )

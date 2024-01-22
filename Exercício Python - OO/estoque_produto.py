@@ -43,7 +43,7 @@ class estoque_produto:
             if (produto_localizado):
                 match entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_busca_encontrado, False, 26):
                     case 1: #Alugar
-                        estoque.alugar_produto(produto_em_busca,lista_usuarios,estoque)
+                        estoque.alugar_produto(produto_localizado,lista_usuarios,estoque)
                         break
                     case 2: #Buscar outro produto
                         pass
@@ -61,16 +61,26 @@ class estoque_produto:
     def exibir_lista_produto(self):
         cont = 1
         lista = ""
-        for produto in self.__lista_produto:
-            lista += str(produto.get_id()) + "- " + str(produto.get_titulo()) + " ("+str(produto.get_tipo())+")\n"
-            cont+=1
-            #print(produto.get_id(),"- "+produto.get_titulo(),sep="") #Implementar (Livro, mídia digital)
-        escolhido = entrada_saida.exibir_lista_geral_produtos(False,lista,cont)
-        if escolhido > produto.get_id():
-            return False
-        else:
-            return escolhido
+        opcao_invalida = False
+        while True:
+            entrada_saida.limpa_tela()
+            entrada_saida.separa_texto(artes_ascii.nome_biblioteca)
+            for produto in self.__lista_produto:
+                lista += str(produto.get_id()) + "- " + str(produto.get_titulo()) + " ("+str(produto.get_tipo())+")\n"
+                cont+=1
+                #print(produto.get_id(),"- "+produto.get_titulo(),sep="") #Implementar (Livro, mídia digital)
+            escolhido = entrada_saida.exibir_lista_geral_produtos(opcao_invalida,lista,cont)
 
+            if escolhido > self.coleta_ultimo_id():
+                opcao_invalida = True
+            else:
+                return escolhido
+        
+    def coleta_ultimo_id(self):
+        cont = 1
+        for produto in self.__lista_produto:
+            cont+=1
+        return cont
     def buscar_produto(self, id):
         for produto in self.__lista_produto:
             if(produto.get_id() == id):
@@ -85,5 +95,4 @@ class estoque_produto:
             validacao.confirmar_aluguel(cliente, produto, tempo_aluguel,estoque)
         else:
             print("Cliente não encontrado")
-
-
+            print(cliente)

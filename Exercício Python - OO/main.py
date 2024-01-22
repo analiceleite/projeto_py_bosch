@@ -14,7 +14,7 @@ usuario_em_andamento = clientes()
 usuario_em_andamento.set_nome("Admin")
 usuario_em_andamento.set_rg("1234")
 usuario_em_andamento.set_telefone("4321")
-usuario_em_andamento.set_endereco("Teste")
+usuario_em_andamento.set_endereco("Teste") 
 lista_usuarios.adicionar_cliente(usuario_em_andamento)
 
 def main():

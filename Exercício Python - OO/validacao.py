@@ -192,8 +192,8 @@ def valida_rg_cliente():
         if len(rg) != 7 or not rg.isdigit():
             opcao_invalida = True
         else:
-            rg_formatado = f"{rg[0]}.{'.'.join([rg[i:i+3] for i in range(1, 7, 3)])}"
-            return rg_formatado
+            #rg_formatado = f"{rg[0]}.{'.'.join([rg[i:i+3] for i in range(1, 7, 3)])}"
+            return rg
 
 def valida_telefone_cliente():
     telefone = ""

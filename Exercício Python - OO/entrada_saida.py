@@ -168,8 +168,19 @@ def menu_item_pesquisado():
     return retorno_opcao_inteiro()
 
 def solicitar_rg_aluguel(): #Solicita RG do cliente no momento do aluguel do produto
-    print("Insira o RG do cliente: ")
-    return retorno_opcao_string()
+    opcao_invalida = False
+    while True:
+        limpa_tela()
+        separa_texto(artes_ascii.nome_biblioteca)
+        centraliza_titulo_menu(artes_ascii.titulo_livro_em_locacao)
+        if(opcao_invalida):
+            centraliza_opcao_invalida(artes_ascii.opcao_invalida)
+        print(centralizar_texto("Insira o RG do cliente:",largura_tela))
+        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",12)
+        if (entrada):
+            return entrada
+        opcao_invalida = True
+    
 
 ## solicitar_tempo_aluguel
 #def solicitar_confirmacao_aluguel(produto, cliente):
@@ -329,7 +340,8 @@ def solicitar_menu_sim_nao_editar(mensagem, opcao_invalida,linha):
         centraliza_titulo_menu(mensagem)
         entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
         linha-=1
-        return entrada
+        if (entrada):
+            return entrada
         #opcao_invalida = True
 
 def solicitar_menu_edicao(menu, mensagem, opcao_invalida, linha):

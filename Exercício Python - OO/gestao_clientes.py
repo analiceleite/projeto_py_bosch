@@ -8,7 +8,6 @@ class gestao_clientes:
         self.__lista_cliente = value
     
     def adicionar_cliente(self, cliente_em_cadastro):
-        print("ADICIONOU")
         self.__lista_cliente.append(cliente_em_cadastro)
 
     def buscar_cliente(self, rg):
