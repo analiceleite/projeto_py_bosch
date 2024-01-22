@@ -40,7 +40,7 @@ class midia_digital(item_biblioteca):
         self.set_id(estoque.atribuir_id())
 
         if(validacao.confirmar_cadastro_midia(self, estoque)):
-            while (i < self.__quantidade_disponível):
+            while (i < self.get_quantidade_disponivel()):
                 self.add_lista_midia_digital()
                 i += 1
 
