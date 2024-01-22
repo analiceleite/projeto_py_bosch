@@ -185,37 +185,36 @@ def menu_escolher_categoria(mensagem):
 #Menus Mídia digital
 
 ## ------- SOLICITAÇÕES ------- ## 
-def solicitar_cadastro_livro_string(mensagem):
-    opcaoInvalida = False
-    linha = 13
+def solicitar_cadastro_livro_string(titulo, mensagem, opcao_invalida, linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
-        centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
-        if(opcaoInvalida):
+        centraliza_titulo_menu(titulo)
+        if(opcao_invalida):
+            linha += 1
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 14
         centraliza_titulo_menu("\nInsira "+mensagem)
         entrada = obter_entrada_centralizada_string("\033[33m"+"---> ",linha) 
+        linha -= 1
         if (entrada):
             return entrada
-        opcaoInvalida = True
+        opcao_invalida = True
 
-def solicitar_cadastro_livro_int(mensagem):
-    opcaoInvalida = False
-    linha = 13
+def solicitar_cadastro_livro_int(titulo, mensagem, opcao_invalida):
+    linha = 14
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
-        centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
-        if(opcaoInvalida):
+        centraliza_titulo_menu(titulo)
+        if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 14
+            linha += 1
         centraliza_titulo_menu("\nInsira "+mensagem)
         entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
         if (entrada):
             return entrada
-        opcaoInvalida = True
+        opcao_invalida = True
+        linha-= 1
 
 def solicitar_cadastro_livro_float(mensagem, opcao_invalida):
     linha = 13
@@ -241,7 +240,7 @@ def solicitar_categoria_livro():
         centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
         if (opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 21
+            #linha = 21
         centraliza_titulo_menu("\nEscolha o gênero do livro")
         imprime_menu(artes_ascii.menu_escolher_categoria_livro)
         match obter_entrada_centralizada_int("\033[33m"+"---> ",linha):
@@ -284,30 +283,30 @@ def solicitar_categoria_midia():
             case _:
                 opcao_invalida = True
 
-def solicitar_ano_livro_int(mensagem,opcao_invalida):
-    linha = 13
+def solicitar_ano_livro_int(mensagem,opcao_invalida,linha):
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 14
+            linha += 1
         centraliza_titulo_menu("\nInsira "+mensagem)
         entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha) 
         if (entrada):
             return entrada
+        linha -= 1
         opcao_invalida = True
 
 def solicitar_classificacao_indicativa_int(mensagem,opcao_invalida):
-    linha = 13
+    linha = 14
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
         centraliza_titulo_menu(artes_ascii.titulo_livro_em_andamento)
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha = 14
+            #linha = 14
         centraliza_titulo_menu("\nInsira "+mensagem)
         entrada = obter_entrada_centralizada_string("\033[33m"+"---> ",linha) 
         if (entrada):
@@ -470,27 +469,32 @@ def solicitar_confirmacao_cadastro_cliente(cliente_em_cadastro):
     print("Nome:",cliente_em_cadastro.get_nome(),"\nRG:",cliente_em_cadastro.get_rg(),"\nTelefone:",cliente_em_cadastro.get_telefone(),"\nEndereço",cliente_em_cadastro.get_endereco())
     return bool_menu_confirmacao()
 
-def solicitar_confirmacao_livro(livro_em_cadastro):
+
+def padrao_solicitacao_confirmacoes():
     limpa_tela()
     separa_texto(artes_ascii.nome_biblioteca)
     centraliza_titulo_menu(artes_ascii.titulo_confirmar_cadastro)
+
+
+def solicitar_confirmacao_livro(livro_em_cadastro):
+    padrao_solicitacao_confirmacoes()
     detalhes_livro = artes_ascii.confirmacao_livro(livro_em_cadastro)
     separa_confirmacao_livro(detalhes_livro)
-    
 
 def solicitar_confirmacao_midia(midia_em_cadastro):
-    limpa_tela()
-    separa_texto(artes_ascii.nome_biblioteca)
-    centraliza_titulo_menu(artes_ascii.titulo_confirmar_cadastro)
+    padrao_solicitacao_confirmacoes()
     detalhes_midia = artes_ascii.confirmacao_midia(midia_em_cadastro)
     separa_confirmacao_livro(detalhes_midia)
 
 def solicitar_confirmacao_revista(revista_em_cadastro):
-    limpa_tela()
-    separa_texto(artes_ascii.nome_biblioteca)
-    centraliza_titulo_menu(artes_ascii.titulo_confirmar_cadastro)
+    padrao_solicitacao_confirmacoes()
     detalhes_revista = artes_ascii.confirmacao_revista(revista_em_cadastro)
     separa_confirmacao_livro(detalhes_revista)
+
+def solicitar_confirmacao_cliente(cliente_em_cadastro):
+    padrao_solicitacao_confirmacoes()
+    detalhes_cliente = artes_ascii.confirmacao_cliente(cliente_em_cadastro)
+    separa_confirmacao_livro(detalhes_cliente)
 
 def exibir_livro_pesquisado(livro_pesquisado):
     print("Título:",livro_pesquisado.get_titulo(),"\nGênero:",livro_pesquisado.get_genero(),"\nAutoria:",livro_pesquisado.get_autoria(),"\nAno lançamento:",livro_pesquisado.get_ano_lancamento(),"\nQuantidade de páginas:",livro_pesquisado.get_quant_paginas(),"pgs.\nClassificação indicativa:",livro_pesquisado.get_classificacao_indicativa(),"+\nIdioma:",livro_pesquisado.get_idioma()+"\nTiragem:",livro_pesquisado.get_tiragem(),"\nAvaliação:",livro_pesquisado.get_avaliacao_geral(),"\nBest Seller:",livro_pesquisado.get_is_best_seller())

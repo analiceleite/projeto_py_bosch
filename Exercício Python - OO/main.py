@@ -37,6 +37,8 @@ def main():
                         case 4: #Jogos
                             print
                             #Inserir jogos
+                        case 5:
+                            main()
                 case 2: #Cliente
                     usuario_em_andamento = clientes()
                     usuario_em_andamento.criar_usuario(lista_usuarios)

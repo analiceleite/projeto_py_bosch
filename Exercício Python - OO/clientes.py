@@ -26,9 +26,9 @@ class clientes:
         self.__telefone = value
 
     def criar_usuario(self, lista_usuarios):
-        self.set_nome(entrada_saida.solicitar_dados_cliente("nome"))
-        self.set_rg(entrada_saida.solicitar_dados_cliente("RG"))
-        self.set_telefone(entrada_saida.solicitar_dados_cliente("telefone"))
-        self.set_endereco(entrada_saida.solicitar_dados_cliente("endereço"))
+        self.set_nome(entrada_saida.solicitar_cadastro_livro_string("o nome", False))
+        self.set_rg(validacao.valida_rg_cliente())
+        self.set_telefone(entrada_saida.solicitar_cadastro_livro_int("telefone", False))
+        self.set_endereco(entrada_saida.solicitar_cadastro_livro_string("endereço", False))
 
         validacao.confirmar_cadastro_cliente(self, lista_usuarios)

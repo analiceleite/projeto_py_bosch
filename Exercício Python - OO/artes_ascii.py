@@ -16,6 +16,7 @@ titulo_livro_em_andamento = "               >>> CADASTRANDO LIVRO <<<           
 titulo_midia_em_andamento = "            >>> CADASTRANDO MÍDIA DIGITAL <<<           "
 titulo_revista_em_andamento = "              >>> CADASTRANDO REVISTA <<<               "
 titulo_jogos_em_andamento = "               >>> CADASTRANDO JOGOS <<<                "
+titulo_cliente_em_andamento = "              >>> CADASTRANDO CLIENTE <<<               "
 titulo_confirmar_cadastro = "              >>> CONFIRMAR CADASTRO <<<                "
 titulo_editar_informacao = "\n          Selecione a informação a ser editada          "
 titulo_best_seller = "\n              Este livro é um best seller?              "
@@ -100,6 +101,12 @@ menu_edicao_revista = """
 [7]- Idioma     
            [8]- Quantidade disponível
 """
+menu_edicao_cliente = """
+  [1]- Nome
+[2]- RG
+     [3]- Telefone
+     [4]- Endereço
+"""
 def confirmacao_livro(livro):
     detalhes_livro = (
     f"\nTítulo: {livro.get_titulo()}\n"
@@ -122,6 +129,7 @@ def confirmacao_midia(midia):
     f"Gênero: {midia.get_categoria()}\n"
     f"Autoria: {midia.get_autoria()}\n"
     f"Ano lançamento: {midia.get_ano_lancamento()}\n"
+    f"Tempo duração: {midia.get_tempo_duracao()} minuto(s)\n"
     f"Classificação indicativa: {midia.get_classificacao_indicativa()}+\n"
     f"Idioma: {midia.get_idioma()}\n"
     f"Tiragem: {midia.get_tiragem():,} cópia(s)\n"
@@ -142,3 +150,12 @@ def confirmacao_revista(revista):
     f"Quantidade disponível: {revista.get_quantidade_disponivel():,}"
     )
     return detalhes_revista
+
+def confirmacao_cliente(cliente):
+    detalhes_cliente = (
+    f"\nNome: {cliente.get_nome()}\n"
+    f"RG: {cliente.get_rg()}\n"
+    f"Telefone: {cliente.get_telefone()}\n"
+    f"Endereço: {cliente.get_endereco()}"
+    )
+    return detalhes_cliente

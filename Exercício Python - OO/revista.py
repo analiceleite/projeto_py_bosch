@@ -1,7 +1,7 @@
 from item_biblioteca import item_biblioteca
 import entrada_saida
 import validacao
-
+import artes_ascii
 class revista(item_biblioteca):
     def __init__(self):
         self.__quant_paginas = None
@@ -24,21 +24,22 @@ class revista(item_biblioteca):
 
     def criar_revista(self, estoque):
         i = 0
-        self.set_titulo(entrada_saida.solicitar_cadastro_livro_string("o titulo"))
-        self.__volume = entrada_saida.solicitar_cadastro_livro_int("o volume/edição")
-        self.set_autoria(entrada_saida.solicitar_cadastro_livro_string("a editora"))
+        art = artes_ascii.titulo_revista_em_andamento
+        self.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo",False,14))
+        self.__volume = entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False)
+        self.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a editora",False,14))
         self.set_ano_lancamento(validacao.validar_ano_lancamento())
-        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int("a quantidade de páginas")
+        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False)
         self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa())
-        self.set_idioma(entrada_saida.solicitar_cadastro_livro_string("o idioma"))
-        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int("a quantidade disponível"))
+        self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))
+        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False))
         self.set_locatario(None)
         self.set_tempo_aluguel(None)
         self.set_tipo("Revista")
         self.set_id(estoque.atribuir_id())
 
         if(validacao.confirmar_cadastro_revista(self,estoque)):
-            while (i < self.get_quantidade_disponivel):
+            while (i < self.get_quantidade_disponivel()):
                 self.add_lista_revista()
                 i += 1
 
