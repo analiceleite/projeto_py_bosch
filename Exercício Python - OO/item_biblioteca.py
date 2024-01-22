@@ -9,9 +9,29 @@ class item_biblioteca:
         self.__avaliacao_geral = None
         self.__idioma = None
         self.__tipo = None
-
+        self.__locatario = None
+        self.__tempo_aluguel = None
+        self.__quantidade_disponivel = None
+        self.__quantidade_votos = None
 
 #Getter & Setters
+
+    def get_quantidade_votos(self):
+        return self.__quantidade_votos
+    def set_quantidade_votos(self, value):
+        self.__quantidade_votos = value
+    def get_quantidade_disponivel(self):
+        return self.__quantidade_disponivel
+    def set_quantidade_disponivel(self, value):
+        self.__quantidade_disponivel = value
+    def get_locatario(self):
+        return self.__locatario
+    def set_locatario(self, value):
+        self.__locatario = value
+    def get_tempo_aluguel(self):
+        return self.__tempo_aluguel
+    def set_tempo_aluguel(self, value):
+        self.__tempo_aluguel = value
     def get_tipo(self):
         return self.__tipo
     def set_tipo(self, value):
@@ -48,4 +68,3 @@ class item_biblioteca:
         return self.__idioma
     def set_idioma(self, value):
         self.__idioma = value
-    

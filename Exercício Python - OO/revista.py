@@ -6,7 +6,13 @@ class revista(item_biblioteca):
     def __init__(self):
         self.__quant_paginas = None
         self.__volume = None
+        self.__lista_revistas = []
 
+    
+    def get_lista_revistas(self):
+        return self.__lista_revistas
+    def set_lista_revistas(self, value):
+        self.__lista_revistas = value
     def get_quant_paginas(self):
         return self.__quant_paginas
     def set_quant_paginas(self, value):
@@ -17,7 +23,7 @@ class revista(item_biblioteca):
         self.__volume = value
 
     def criar_revista(self, estoque):
-        
+        i = 0
         self.set_titulo(entrada_saida.solicitar_cadastro_produto_geral("o titulo"))
         self.__volume = entrada_saida.solicitar_cadastro_produto_geral_int("o volume/edição")
         self.set_autoria(entrada_saida.solicitar_cadastro_produto_geral("a editora"))
@@ -25,9 +31,20 @@ class revista(item_biblioteca):
         self.__quant_paginas = entrada_saida.solicitar_cadastro_produto_geral_int("a quantidade de páginas")
         self.set_classificacao_indicativa(entrada_saida.solicitar_cadastro_produto_geral_int("a classificação indicativa"))
         self.set_idioma(entrada_saida.solicitar_cadastro_produto_geral("o idioma"))
+        self.__quantidade_disponível = entrada_saida.solicitar_quantidade_disponivel()
+        self.set_locatario(None)
+        self.set_tempo_aluguel(None)
         self.set_tipo("Revista")
+        self.set_id(estoque.atribuir_id())
 
-        validacao.confirmar_cadastro_revista(self,estoque)
+        if(validacao.confirmar_cadastro_revista(self,estoque)):
+            while (i < self.__quantidade_disponível):
+                self.add_lista_revista()
+                i += 1
+
+    def add_lista_revista(self):
+        self.__lista_revistas.append(self)
+        print("Adicionou",self.get_locatario())
 
     def ler_revista():
         print

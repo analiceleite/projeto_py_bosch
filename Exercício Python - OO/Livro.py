@@ -7,8 +7,13 @@ class livro(item_biblioteca):
         self.__quant_paginas = None
         self.__genero = None
         self.__is_best_seller = None
+        self.__lista_livros = []
 
-#Getter & Setters
+#Getter & Setters        
+    def get_lista_livros(self):
+        return self.__lista_livros
+    def set_lista_livros(self, value):
+        self.__lista_livros = value
     def get_quant_paginas(self):
         return self.__quant_paginas
     def set_quant_paginas(self, value):
@@ -23,22 +28,34 @@ class livro(item_biblioteca):
         self.__is_best_seller = value
 
     def criar_livro(self,estoque):
-        self.set_titulo(entrada_saida.solicitar_cadastro_produto_geral("o titulo"))
-        self.__genero = entrada_saida.menu_solicitar_categoria_livro()
-        self.set_autoria(entrada_saida.solicitar_cadastro_produto_geral("a autoria"))
-        self.set_ano_lancamento(entrada_saida.solicitar_cadastro_produto_geral_int("o ano de lançamento"))#Validar número negativo
-        self.__quant_paginas = entrada_saida.solicitar_cadastro_produto_geral_int("a quantidade de páginas") #Validar número negativo
-        self.set_classificacao_indicativa(entrada_saida.solicitar_cadastro_produto_geral_int("a classificação indicativa")) #Validar número negativo
-        self.set_idioma(entrada_saida.solicitar_cadastro_produto_geral("o idioma"))
-        self.set_tiragem(entrada_saida.solicitar_cadastro_produto_geral_int("a tiragem")) #Validar número negativo
-        self.set_avaliacao_geral(entrada_saida.solicitar_cadastro_produto_geral_float("a avaliação geral"))#Validar número negativo
-        self.__is_best_seller = entrada_saida.solicitar_best_seller()
-
+        i = 0
+    
+        self.set_titulo(entrada_saida.solicitar_cadastro_livro_string("o titulo")) #-- Finalizado    
+        self.__genero = entrada_saida.solicitar_categoria_livro() #-- Finalizado
+        self.set_autoria(entrada_saida.solicitar_cadastro_livro_string("a autoria")) #-- Finalizado
+        self.set_ano_lancamento(validacao.validar_ano_lancamento()) #-- Finalizado
+        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int("a quantidade de páginas") #--Finalizado
+        self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa()) #-- Finalizado
+        self.set_idioma(entrada_saida.solicitar_cadastro_livro_string("o idioma")) #-- Finalizado
+        self.set_tiragem(entrada_saida.solicitar_cadastro_livro_int("a tiragem")) #-- Finalizado
+        self.set_avaliacao_geral(validacao.validar_avaliacao_produtos(self)) #-- Finalizado
+        self.__is_best_seller = validacao.valida_best_seller() #-- Em andamento
+        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int("a quantidade disponível"))
+        self.set_locatario(None)
+        self.set_tempo_aluguel(None)
         self.set_tipo("Livro")
         self.set_id(estoque.atribuir_id())
         
-        validacao.confirmar_cadastro_livro(self,estoque)
-        
+        if(validacao.confirmar_cadastro_livro(self,estoque)):
+            while (i < self.get_quantidade_disponivel()):
+                self.add_lista_livro()
+                i+=1
+                
+
+
+    def add_lista_livro(self):
+        self.__lista_livros.append(self)
+        #print("Adicionou",self.get_locatario())
     def ler_livro():
         print
     def atualizar_livro():

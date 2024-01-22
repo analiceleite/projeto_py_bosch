@@ -1,0 +1,121 @@
+nome_biblioteca = """
+██     ██  █████  ██████  ██████      ██      ██ ██████ 
+ ██     ██ ██   ██ ██   ██ ██   ██     ██      ██ ██   ██ 
+ ██  █  ██ ███████ ██████  ██████      ██      ██ ██████  
+ ██ ███ ██ ██   ██ ██   ██ ██          ██      ██ ██   ██ 
+  ███ ███  ██   ██ ██   ██ ██          ███████ ██ ██████  
+                                                                                                                                                                                                   
+"""
+#separa_texto("--------------------------------------------------------")
+opcao_invalida = "\n                   >> Opção Inválida <<                  "
+titulo_principal = "                 >>> MENU PRINCIPAL <<<                 "
+
+titulo_escolher_tipo_cadastro = "           >>> ESCOLHA O TIPO DE CADASTRO <<<           "
+titulo_escolher_tipo_produto = "           >>> ESCOLHA O TIPO DO PRODUTO <<<            "
+titulo_livro_em_andamento = "               >>> CADASTRANDO LIVRO <<<                "
+titulo_midia_em_andamento = "            >>> CADASTRANDO MÍDIA DIGITAL <<<           "
+titulo_revista_em_andamento = "              >>> CADASTRANDO REVISTA <<<               "
+titulo_jogos_em_andamento = "               >>> CADASTRANDO JOGOS <<<                "
+titulo_confirmar_cadastro = "              >>> CONFIRMAR CADASTRO <<<                "
+titulo_editar_informacao = "\n          Selecione a informação a ser editada          "
+titulo_best_seller = "\n              Este livro é um best seller?              "
+
+
+menu_principal_opcoes = """
+ [1]- Cadastrar   
+ [2]- Buscar      
+ [3]- Alugar      
+ [4]- Sair        
+"""
+menu_opcoes_cadastro = """
+[1]- Produto   
+[2]- Cliente    
+             [3]- Voltar ao menu principal
+"""
+
+menu_escolher_tipo_produto = """
+[1]- Livro     
+  [2]- Mídia digital
+[3]- Revistas  
+[4]- Jogos     
+                  [5]- Voltar para o menu principal
+"""
+
+menu_escolher_categoria_livro = """
+[1]- Ação      
+[2]- Aventura  
+[3]- Comédia   
+[4]- Romance   
+[5]- Thriller  
+"""
+menu_escolher_categoria_midia = """
+[1]- CD        
+[2]- DVD       
+[3]- Blu-Ray   
+[4]- Fita VHS   
+     [5]- Disco de Vinil  
+"""
+
+
+menu_sim_não_bestseller = """
+ [1]- Sim 
+ [2]- Não
+"""
+menu_sim_não_editar = """
+ [1]- Sim 
+ [2]- Não
+       [3]- Editar    
+"""
+menu_edicao_livro = """
+[1]- Título     
+[2]- Gênero     
+[3]- Autoria   
+      [4]- Ano de lançamento
+          [5]- Quantidade de páginas
+             [6]- Classificação Indicativa
+[7]- Idioma    
+[8]- Tiragem   
+[9]- Avaliação  
+  [10]- Best Seller 
+           [11]- Quantidade disponível
+"""
+menu_edicao_midia = """
+[1]- Título     
+[2]- Gênero     
+[3]- Autoria   
+      [4]- Ano de lançamento
+             [5]- Classificação Indicativa
+[6]- Idioma    
+[7]- Tiragem   
+[8]- Avaliação  
+           [9]- Quantidade disponível
+"""
+def confirmacao_livro(livro):
+    detalhes_livro = (
+    f"\nTítulo: {livro.get_titulo()}\n"
+    f"Gênero: {livro.get_genero()}\n"
+    f"Autoria: {livro.get_autoria()}\n"
+    f"Ano lançamento: {livro.get_ano_lancamento()}\n"
+    f"Quantidade de páginas: {livro.get_quant_paginas():,} pgs.\n"
+    f"Classificação indicativa: {livro.get_classificacao_indicativa()}+\n"
+    f"Idioma: {livro.get_idioma()}\n"
+    f"Tiragem: {livro.get_tiragem():,} cópias\n"
+    f"Avaliação: {livro.get_avaliacao_geral()}\n"
+    f"Best Seller: {livro.get_is_best_seller()}\n"
+    f"Quantidade disponível: {livro.get_quantidade_disponivel()}"
+    )
+    return detalhes_livro
+
+def confirmacao_midia(midia):
+    detalhes_midia = (
+    f"\nTítulo: {midia.get_titulo()}\n"
+    f"Gênero: {midia.get_categoria()}\n"
+    f"Autoria: {midia.get_autoria()}\n"
+    f"Ano lançamento: {midia.get_ano_lancamento()}\n"
+    f"Classificação indicativa: {midia.get_classificacao_indicativa()}+\n"
+    f"Idioma: {midia.get_idioma()}\n"
+    f"Tiragem: {midia.get_tiragem():,} cópia(s)\n"
+    f"Avaliação: {midia.get_avaliacao_geral()}\n"
+    f"Quantidade disponível: {midia.get_quantidade_disponivel()}"
+    )
+    return detalhes_midia

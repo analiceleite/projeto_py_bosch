@@ -1,0 +1,10 @@
+Condições para funcionar centralização:
+
+Resolução da tela: 1920x1080
+
+Powershell e Python Debugger abertos no lado direito (Alinhar com o '+')
+
+Menu esquerdo fechado
+
+verificar float na quantidade disponivel e qualquer outro que envolva int
+edit: font size = 14
