@@ -172,7 +172,7 @@ def solicitar_rg_aluguel(): #Solicita RG do cliente no momento do aluguel do pro
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         print(centralizar_texto("Insira o RG do cliente:",largura_tela))
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",12)
+        entrada = obter_entrada_centralizada_int("---> ",12, 0)
         if (entrada):
             return entrada
         opcao_invalida = True
@@ -226,7 +226,6 @@ def solicitar_cadastro_livro_float(titulo, mensagem, opcao_invalida, linha):
         opcao_invalida = True
 
 def solicitar_categoria_livro(linha,opcao_invalida):
-    opcao_invalida = False
     while True:
         limpa_tela()
         separa_texto(artes_ascii.nome_biblioteca)
@@ -261,7 +260,7 @@ def solicitar_categoria_midia():
             linha = 21
         centraliza_titulo_menu("\nEscolha a categoria da mídia digital")
         imprime_menu(artes_ascii.menu_escolher_categoria_midia)
-        match obter_entrada_centralizada_int("\033[33m"+"---> ",linha):
+        match obter_entrada_centralizada_int("---> ",linha, 0):
             case 1:
                 return "CD"
             case 2:
@@ -319,13 +318,10 @@ def solicitar_menu_sim_nao_editar(mensagem, opcao_invalida,linha):
     while True:
         if(opcao_invalida):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-            linha+=1
         centraliza_titulo_menu(mensagem)
         entrada = obter_entrada_centralizada_int("---> ",linha, 0) 
-        linha-=1
         if (entrada):
             return entrada
-        #opcao_invalida = True
 
 def solicitar_menu_edicao(menu, mensagem, opcao_invalida, linha):
     while True:
@@ -337,7 +333,7 @@ def solicitar_menu_edicao(menu, mensagem, opcao_invalida, linha):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
             linha += 1
         centraliza_titulo_menu(mensagem)
-        entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha)
+        entrada = obter_entrada_centralizada_int("---> ",linha, 0)
         if (entrada):
             return entrada
         opcao_invalida = True
@@ -426,7 +422,7 @@ def menu_buscar(quant_estoque, opcao_invalida):
             if (opcao_invalida):
                 centraliza_opcao_invalida(artes_ascii.opcao_invalida)
             imprime_menu(artes_ascii.menu_busca)
-            entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",quant_estoque+16) 
+            entrada = obter_entrada_centralizada_int("---> ",quant_estoque+16,0) 
             if (entrada in (1,2)): ## Verifica input com quantidade de opções disponíveis
                 return entrada
             opcao_invalida = True
@@ -502,7 +498,7 @@ def exibir_lista_geral_produtos(opcao_invalida, lista,cont):
         linha += 1
     separa_texto(lista)
     print(centralizar_texto("Insira o ID do produto:",largura_tela))
-    entrada = obter_entrada_centralizada_int("\033[33m"+"---> ",linha)
+    entrada = obter_entrada_centralizada_int("---> ",linha, 0)
     linha -= 1
     if (entrada):
         return entrada

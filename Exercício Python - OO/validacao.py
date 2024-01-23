@@ -19,11 +19,13 @@ def confirmar_cadastro_livro(livro_em_cadastro,estoque):
                 case 2:
                     cadastro_nao_cancelado = False
                 case 3:
-                    verificar_edicao_livro(livro_em_cadastro, estoque)
+                    verificar_edicao_livro(livro_em_cadastro)
+                case _:
+                    pass
         else:
             opcao_invalida = True
 
-def verificar_edicao_livro(livro_em_cadastro, estoque):
+def verificar_edicao_livro(livro_em_cadastro):
     opcao_invalida = False
     operacao_rodando = True
     art = artes_ascii.titulo_livro_em_andamento
@@ -32,25 +34,25 @@ def verificar_edicao_livro(livro_em_cadastro, estoque):
             case 1:
                 livro_em_cadastro.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo", False,14))
             case 2:
-                livro_em_cadastro.set_genero(entrada_saida.solicitar_categoria_livro())
+                livro_em_cadastro.set_genero(entrada_saida.solicitar_categoria_livro(20, False))
             case 3:
                 livro_em_cadastro.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a autoria", False,14))
             case 4:
-                livro_em_cadastro.set_ano_lancamento(validar_ano_lancamento())
+                livro_em_cadastro.set_ano_lancamento(validar_ano_lancamento(1))
             case 5:
-                livro_em_cadastro.set_quant_paginas(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas", False))
+                livro_em_cadastro.set_quant_paginas(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas", False, 14))
             case 6:
                 livro_em_cadastro.set_classificacao_indicativa(validar_classificacao_indicativa())
             case 7:
-                livro_em_cadastro.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma", False,14))
+                livro_em_cadastro.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma", False, 14))
             case 8:
-                livro_em_cadastro.set_tiragem(entrada_saida.solicitar_cadastro_livro_int(art,"a tiragem", False))
+                livro_em_cadastro.set_tiragem(entrada_saida.solicitar_cadastro_livro_int(art,"a tiragem", False, 14))
             case 9:
-                livro_em_cadastro.set_avaliacao_geral(validar_avaliacao_produtos(livro_em_cadastro))
+                livro_em_cadastro.set_avaliacao_geral(validar_avaliacao_produtos(1,livro_em_cadastro))
             case 10:
                 livro_em_cadastro.set_is_best_seller(valida_best_seller())
             case 11:
-                livro_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False))
+                livro_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False, 14))
         operacao_rodando = False
 
     
@@ -126,19 +128,19 @@ def verificar_edicao_revista(revista_em_cadastro, estoque):
             case 1:
                 revista_em_cadastro.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo",False,14))
             case 2:
-                revista_em_cadastro.set_volume(entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False))
+                revista_em_cadastro.set_volume(entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False, 14))
             case 3:
                 revista_em_cadastro.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a autoria",False,14))
             case 4:
-                revista_em_cadastro.set_ano_lancamento(validar_ano_lancamento())
+                revista_em_cadastro.set_ano_lancamento(validar_ano_lancamento(3))
             case 5:
-                revista_em_cadastro.set_quant_paginas(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False))
+                revista_em_cadastro.set_quant_paginas(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False, 14))
             case 6:
                 revista_em_cadastro.set_classificacao_indicativa(validar_classificacao_indicativa())
             case 7:
                 revista_em_cadastro.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))
             case 8:
-                revista_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False))
+                revista_em_cadastro.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False, 14))
         operacao_rodando = False
 
 def verificar_edicao_cliente(cliente_em_cadastro):
@@ -178,7 +180,7 @@ def confirmar_cadastro_cliente(cliente_em_cadastro, lista_usuarios):
     
 def confirmar_aluguel(cliente, produto, tempo_aluguel, estoque):
     if (entrada_saida.confirmar_aluguel(cliente, produto, tempo_aluguel)):
-       produto.set_locatario(cliente)
+       produto.set_locatario(cliente.get_nome())
        produto.set_tempo_aluguel(tempo_aluguel)
        estoque.add_lista_produto_alugado(produto)
 
@@ -191,7 +193,6 @@ def valida_rg_cliente():
         if len(rg) != 7 or not rg.isdigit():
             opcao_invalida = True
         else:
-            #rg_formatado = f"{rg[0]}.{'.'.join([rg[i:i+3] for i in range(1, 7, 3)])}"
             return rg
 
 def valida_telefone_cliente():

@@ -29,15 +29,17 @@ class midia_digital(item_biblioteca):
         self.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo", False, 14))
         self.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a autoria", False, 14))
         self.set_ano_lancamento(validacao.validar_ano_lancamento(2))
-        self.__tempo_duracao = entrada_saida.solicitar_cadastro_livro_int(art,"a duração em minutos", False)#Validações
+        self.__tempo_duracao = entrada_saida.solicitar_cadastro_livro_int(art,"a duração em minutos", False, 14)#Validações
         self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa())
         self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma", False, 14))
-        self.set_tiragem(entrada_saida.solicitar_cadastro_livro_int(art,"a tiragem", False))
+        self.set_tiragem(entrada_saida.solicitar_cadastro_livro_int(art,"a tiragem", False, 14))
         self.set_avaliacao_geral(validacao.validar_avaliacao_produtos(2,self))
-        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False))
+        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False, 14))
         self.set_tipo("Mídia Digital")
         self.set_locatario(None)
         self.set_tempo_aluguel(None)
+        self.set_data_retirada(None)
+        self.set_data_devolutiva(None)
         self.set_id(estoque.atribuir_id())
 
         if(validacao.confirmar_cadastro_midia(self, estoque)):

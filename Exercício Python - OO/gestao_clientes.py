@@ -1,3 +1,4 @@
+import os
 class gestao_clientes:
     def __init__(self):
         self.__lista_cliente = []
@@ -11,9 +12,8 @@ class gestao_clientes:
         self.__lista_cliente.append(cliente_em_cadastro)
 
     def buscar_cliente(self, rg):
-        for cliente in self.__lista_cliente:
-            if(cliente.get_rg() == rg):
-                print("ACHOU CLIENTE")
+        for cliente in self.get_lista_usuarios():
+            if(cliente.get_rg() == str(rg)):
+                print("ACHOU")
                 return cliente
-            else:
-                return False
+        return False

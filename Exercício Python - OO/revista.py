@@ -26,18 +26,20 @@ class revista(item_biblioteca):
         i = 0
         art = artes_ascii.titulo_revista_em_andamento
         self.set_titulo(entrada_saida.solicitar_cadastro_livro_string(art,"o titulo",False,14))
-        self.__volume = entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False)
+        self.__volume = entrada_saida.solicitar_cadastro_livro_int(art,"o volume/edição",False, 14)
         self.set_autoria(entrada_saida.solicitar_cadastro_livro_string(art,"a editora",False,14))
         self.set_ano_lancamento(validacao.validar_ano_lancamento(3))
-        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False)
+        self.__quant_paginas = entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade de páginas",False, 14)
         self.set_classificacao_indicativa(validacao.validar_classificacao_indicativa())
         self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))
-        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False))
+        self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False, 14))
         self.set_locatario(None)
         self.set_tempo_aluguel(None)
+        self.set_data_retirada(None)
+        self.set_data_devolutiva(None)
         self.set_tipo("Revista")
         self.set_id(estoque.atribuir_id())
-
+        
         if(validacao.confirmar_cadastro_revista(self,estoque)):
             while (i < self.get_quantidade_disponivel()):
                 self.add_lista_revista()

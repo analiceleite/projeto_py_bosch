@@ -8,8 +8,16 @@ class estoque_produto:
     def __init__(self):
         self.__lista_produto = []
         self.__lista_produto_alugado = []
+        self.__lista_livro = []
 
 
+        self.__lista_midia_digital = []
+        self.__lista_revista = []
+
+    def get_lista_livro(self):
+        return self.__lista_livro
+    def set_lista_livro(self, value):
+        self.__lista_livro = value
     def get_lista_produto_alugado(self):
         return self.__lista_produto_alugado
     def set_lista_produto_alugado(self, value):
@@ -28,10 +36,18 @@ class estoque_produto:
 
     def add_lista_produto_alugado(self, produto):
         self.__lista_produto_alugado.append(produto)
-        for produto in self.__lista_produto_alugado:
-            print(produto.get_titulo())
+        for p in self.get_lista_produto_alugado():
+            print(p.get_locatario())
+            print(p.get_tempo_aluguel())
+            print(p.get_titulo())
+            exit()
             #print(produto.get_dono().get_nome())# Método para acessar o nome do dono
-    
+        
+    def add_lista_livro(livro,self):
+        print(livro)
+        livro.__lista_livro.append(livro)
+        print("adicionou")
+
     def opcao_menu_busca(quant_estoque):
         return entrada_saida.menu_buscar(quant_estoque,False)
     
@@ -76,11 +92,12 @@ class estoque_produto:
             else:
                 return escolhido
         
-    def coleta_ultimo_id(self):
-        cont = 1
-        for produto in self.__lista_produto:
-            cont+=1
-        return cont
+    # def coleta_ultimo_id(self):
+    #     cont = 1
+    #     for produto in self.__lista_produto:
+    #         cont+=1
+    #     return cont
+        
     def buscar_produto(self, id):
         for produto in self.__lista_produto:
             if(produto.get_id() == id):
@@ -93,6 +110,6 @@ class estoque_produto:
         if (cliente):
             tempo_aluguel = validacao.confirmar_tempo_aluguel()
             validacao.confirmar_aluguel(cliente, produto, tempo_aluguel,estoque)
-        else:
+        else: #Fazer as tratativas
             print("Cliente não encontrado")
             print(cliente)

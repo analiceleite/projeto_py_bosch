@@ -13,9 +13,20 @@ class item_biblioteca:
         self.__tempo_aluguel = None
         self.__quantidade_disponivel = None
         self.__quantidade_votos = None
+        self.__data_retirada = None
+        self.__data_devolutiva = None
+
+
 
 #Getter & Setters
-
+    def get_data_retirada(self):
+        return self.__data_retirada
+    def set_data_retirada(self, value):
+        self.__data_retirada = value
+    def get_data_devolutiva(self):
+        return self.__data_devolutiva
+    def set_data_devolutiva(self, value):
+        self.__data_devolutiva = value
     def get_quantidade_votos(self):
         return self.__quantidade_votos
     def set_quantidade_votos(self, value):

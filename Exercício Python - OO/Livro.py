@@ -44,13 +44,18 @@ class livro(item_biblioteca):
         self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False, 14))
         self.set_locatario(None)
         self.set_tempo_aluguel(None)
+        self.set_data_retirada(None)
+        self.set_data_devolutiva(None)
         self.set_tipo("Livro")
         self.set_id(estoque.atribuir_id())
         
         if(validacao.confirmar_cadastro_livro(self,estoque)):
             while (i < self.get_quantidade_disponivel()):
-                self.add_lista_livro()
+                estoque.add_lista_livro(self)
                 i+=1
+                print("adicionou")
+                #self.add_lista_livro()
+            exit()
                 
 
 
