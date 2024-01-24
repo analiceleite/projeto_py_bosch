@@ -66,13 +66,13 @@ def limpa_tela():
 def separa_texto(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print('\033[33m'+linha.center(largura_tela))
+        print(linha.center(largura_tela))
         
 
 def separa_confirmacao_livro(texto):
     linhas = texto.split("\n")
     for linha in linhas:
-        print('\033[33m'+centralizar_texto(linha, largura_tela)+'\033[0;0m')
+        print('\033[33m'+centralizar_texto(linha, largura_tela))
     return True
 
 def centraliza_titulo_menu(texto):
@@ -83,7 +83,7 @@ def centraliza_titulo_menu(texto):
 def centraliza_opcao_invalida(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print('\033[33m'+'\033[31m'+linha.center(largura_tela))
+        print('\033[33m'+'\033[31m'+linha.center(largura_tela)+"\033[0;0m")
 
 def centraliza_insersor(texto):
     linhas = texto.split()
@@ -320,8 +320,7 @@ def solicitar_menu_sim_nao_editar(mensagem, opcao_invalida,linha):
             centraliza_opcao_invalida(artes_ascii.opcao_invalida)
         centraliza_titulo_menu(mensagem)
         entrada = obter_entrada_centralizada_int("---> ",linha, 0) 
-        if (entrada):
-            return entrada
+        return entrada
 
 def solicitar_menu_edicao(menu, mensagem, opcao_invalida, linha):
     while True:
@@ -351,17 +350,26 @@ def solicitar_dados_cliente(mensagem):
     print("Insira o "+mensagem+" do cliente:")
     return retorno_opcao_string()
 
-def solicitar_tempo_aluguel():
-    print("Por quanto tempo será alugado:\n[1]- 7 dias\n[2]- 14 dias\n[3]- 21 dias\n[4]- 28 dias")
-    return retorno_opcao_inteiro()
+def solicitar_tempo_aluguel(mensagem, opcao_invalida, linha, cliente):
+    while True:
+        limpa_tela()
+        separa_texto(artes_ascii.nome_biblioteca)
+        centraliza_titulo_menu(artes_ascii.titulo_livro_em_locacao)
+        centraliza_titulo_menu("\nOlá, "+cliente.get_nome()+" por quanto tempo deseja o produto?")
+        if opcao_invalida:
+            centraliza_opcao_invalida(artes_ascii.opcao_invalida)
+        centraliza_titulo_menu(mensagem)
+        entrada = obter_entrada_centralizada_int("---> ", linha, 0)
+        return entrada
 
-def confirmar_aluguel(cliente, produto, tempo_aluguel):
-    print("Produto:",produto.get_titulo(),"\nLocatário:",cliente.get_nome(),"\nTempo para devolução:",tempo_aluguel,"\n\nDeseja confirmar o aluguel?\n[1]- Sim\n[2]- Não")
-    match retorno_opcao_inteiro():
-        case 1:
-            return True
-        case 2:
-            return False
+def exibir_confirmacao_aluguel(cliente, produto):
+    limpa_tela()
+    separa_texto(artes_ascii.nome_biblioteca)
+    centraliza_titulo_menu(artes_ascii.titulo_emprestimo_confirmado)
+    centraliza_titulo_menu("O empréstimo de "+cliente.get_nome()+" foi concluído, retire o produto.\n")
+    centraliza_titulo_menu("Voltando ao menu principal")
+    time.sleep(5)
+        
     
 
 def solicitar_cadastro_produto_geral_int(mensagem): #alugar/cadastro cliente/produtos
@@ -489,20 +497,20 @@ def solicitar_confirmacao_cliente(cliente_em_cadastro):
     detalhes_cliente = artes_ascii.confirmacao_cliente(cliente_em_cadastro)
     separa_confirmacao_livro(detalhes_cliente)
 
-def exibir_lista_geral_produtos(opcao_invalida, lista,cont):
-    linha = cont+10
-    limpa_tela()
-    separa_texto(artes_ascii.nome_biblioteca)
+def solicitar_confirmacao_aluguel(produto, cliente, data_retirada, data_devolutiva):
+    padrao_solicitacao_confirmacoes()
+    detalhes_aluguel = artes_ascii.confirmacao_aluguel(produto, cliente, data_retirada, data_devolutiva)
+    separa_confirmacao_livro(detalhes_aluguel)
+
+
+
+def exibir_lista_geral_produtos(opcao_invalida, lista):
     if(opcao_invalida):
         centraliza_opcao_invalida(artes_ascii.opcao_invalida)
-        linha += 1
     separa_texto(lista)
     print(centralizar_texto("Insira o ID do produto:",largura_tela))
-    entrada = obter_entrada_centralizada_int("---> ",linha, 0)
-    linha -= 1
-    if (entrada):
-        return entrada
-    opcao_invalida = True
+    entrada = obter_entrada_centralizada_int("---> ",14, 0)
+    return entrada
     
     
 
@@ -513,7 +521,13 @@ def exibir_livro_pesquisado(livro_pesquisado):
     separa_confirmacao_livro(detalhes_livro)
 
 def exibir_midia_digital_pesquisada(midia_digital):
-    print("Título:",midia_digital.get_titulo(),"\nCategoria:",midia_digital.get_categoria(),"\nAutoria:",midia_digital.get_autoria(),"\nAno lançamento:",midia_digital.get_ano_lancamento(),"\nClassificação indicativa:",midia_digital.get_classificacao_indicativa(),"+\nIdioma:",midia_digital.get_idioma()+"\nTiragem:",midia_digital.get_tiragem(),"\nAvaliação:",midia_digital.get_avaliacao_geral())
+    limpa_tela()
+    separa_texto(artes_ascii.nome_biblioteca)
+    detalhes_midia = artes_ascii.confirmacao_midia(midia_digital)
+    separa_confirmacao_livro(detalhes_midia)
 
-def exibir_revista_pesquisada(revista_pesquisada):
-    print("Título:",revista_pesquisada.get_titulo(),"\nVolume/Edição:",revista_pesquisada.get_volume(),"\nAutoria:",revista_pesquisada.get_autoria(),"\nAno lançamento:",revista_pesquisada.get_ano_lancamento(),"\nClassificação indicativa:",revista_pesquisada.get_classificacao_indicativa(),"+\nIdioma:",revista_pesquisada.get_idioma())
+def exibir_revista_pesquisada(revista):
+    limpa_tela
+    separa_texto(artes_ascii.nome_biblioteca)
+    detalhes_revista = artes_ascii.confirmacao_revista(revista)
+    separa_confirmacao_livro(detalhes_revista)

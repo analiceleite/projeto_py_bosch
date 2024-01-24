@@ -2,11 +2,14 @@ from item_biblioteca import item_biblioteca
 import entrada_saida
 import validacao
 import artes_ascii
+import time
+from copy import copy
+
 class revista(item_biblioteca):
     def __init__(self):
         self.__quant_paginas = None
         self.__volume = None
-        self.__lista_revistas = []
+
 
     
     def get_lista_revistas(self):
@@ -34,7 +37,6 @@ class revista(item_biblioteca):
         self.set_idioma(entrada_saida.solicitar_cadastro_livro_string(art,"o idioma",False,14))
         self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível",False, 14))
         self.set_locatario(None)
-        self.set_tempo_aluguel(None)
         self.set_data_retirada(None)
         self.set_data_devolutiva(None)
         self.set_tipo("Revista")
@@ -42,12 +44,8 @@ class revista(item_biblioteca):
         
         if(validacao.confirmar_cadastro_revista(self,estoque)):
             while (i < self.get_quantidade_disponivel()):
-                self.add_lista_revista()
+                estoque.add_lista_revista(copy(self))
                 i += 1
-
-    def add_lista_revista(self):
-        self.__lista_revistas.append(self)
-        print("Adicionou",self.get_locatario())
 
     def ler_revista():
         print

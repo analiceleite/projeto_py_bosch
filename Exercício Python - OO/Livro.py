@@ -2,13 +2,14 @@ from item_biblioteca import item_biblioteca
 import entrada_saida
 import validacao
 import artes_ascii
+import time
+from copy import copy
 
 class livro(item_biblioteca):
     def __init__(self):
         self.__quant_paginas = None
         self.__genero = None
         self.__is_best_seller = None
-        self.__lista_livros = []
 
 #Getter & Setters        
     def get_lista_livros(self):
@@ -43,7 +44,6 @@ class livro(item_biblioteca):
         self.__is_best_seller = validacao.valida_best_seller() #-- Em andamento
         self.set_quantidade_disponivel(entrada_saida.solicitar_cadastro_livro_int(art,"a quantidade disponível", False, 14))
         self.set_locatario(None)
-        self.set_tempo_aluguel(None)
         self.set_data_retirada(None)
         self.set_data_devolutiva(None)
         self.set_tipo("Livro")
@@ -51,17 +51,11 @@ class livro(item_biblioteca):
         
         if(validacao.confirmar_cadastro_livro(self,estoque)):
             while (i < self.get_quantidade_disponivel()):
-                estoque.add_lista_livro(self)
+                estoque.add_lista_livro(copy(self))
                 i+=1
-                print("adicionou")
-                #self.add_lista_livro()
-            exit()
-                
+        # entrada_saida.limpa_tela()
+        # entrada_saida.imprime_menu(artes_ascii.)
 
-
-    def add_lista_livro(self):
-        self.__lista_livros.append(self)
-        #print("Adicionou",self.get_locatario())
     def ler_livro():
         print
     def atualizar_livro():

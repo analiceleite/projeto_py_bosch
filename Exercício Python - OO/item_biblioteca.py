@@ -10,11 +10,11 @@ class item_biblioteca:
         self.__idioma = None
         self.__tipo = None
         self.__locatario = None
-        self.__tempo_aluguel = None
         self.__quantidade_disponivel = None
         self.__quantidade_votos = None
         self.__data_retirada = None
         self.__data_devolutiva = None
+        self.__id_emprestimo = None
 
 
 
@@ -39,10 +39,6 @@ class item_biblioteca:
         return self.__locatario
     def set_locatario(self, value):
         self.__locatario = value
-    def get_tempo_aluguel(self):
-        return self.__tempo_aluguel
-    def set_tempo_aluguel(self, value):
-        self.__tempo_aluguel = value
     def get_tipo(self):
         return self.__tipo
     def set_tipo(self, value):

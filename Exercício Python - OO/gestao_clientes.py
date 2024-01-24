@@ -14,6 +14,5 @@ class gestao_clientes:
     def buscar_cliente(self, rg):
         for cliente in self.get_lista_usuarios():
             if(cliente.get_rg() == str(rg)):
-                print("ACHOU")
                 return cliente
         return False

@@ -20,9 +20,10 @@ titulo_revista_em_andamento = "              >>> CADASTRANDO REVISTA <<<        
 titulo_jogos_em_andamento = "               >>> CADASTRANDO JOGOS <<<                "
 titulo_cliente_em_andamento = "              >>> CADASTRANDO CLIENTE <<<               "
 titulo_confirmar_cadastro = "              >>> CONFIRMAR CADASTRO <<<                "
-titulo_confirmar_cadastro = "            >>> LISTA GERAL DOS PRODUTOS <<<            "
+titulo_lista_geral = "            >>> LISTA GERAL DOS PRODUTOS <<<            "
 titulo_editar_informacao = "\n          Selecione a informação a ser editada          "
 titulo_best_seller = "\n              Este livro é um best seller?              "
+titulo_emprestimo_confirmado = "               >>> ALUGUEL CONFIRMADO <<<               "
 
 
 menu_principal_opcoes = """
@@ -118,6 +119,13 @@ menu_edicao_cliente = """
      [3]- Telefone
      [4]- Endereço
 """
+menu_tempo_aluguel = """
+[1]- 7 dias
+[2]- 14 dias
+[3]- 21 dias
+[4]- 28 dias
+"""
+
 def confirmacao_livro(livro):
     detalhes_livro = (
     f"\nTítulo: {livro.get_titulo()}\n"
@@ -171,3 +179,12 @@ def confirmacao_cliente(cliente):
     f"Endereço: {cliente.get_endereco()}"
     )
     return detalhes_cliente
+
+def confirmacao_aluguel(produto, cliente, data_retirada, data_devolutiva):
+  detalhes_aluguel = (
+  f"\nProduto: {produto.get_titulo()}\n"
+  f"Locatário: {cliente.get_nome()}\n"
+  f"Data de retirada: {data_retirada}\n"
+  f"Data de devolutiva: {data_devolutiva}\n"
+  )
+  return detalhes_aluguel

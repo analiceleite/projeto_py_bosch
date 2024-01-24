@@ -3,13 +3,14 @@ from estoque_produto import estoque_produto
 from gestao_clientes import gestao_clientes
 import random
 import artes_ascii
+from datetime import date, timedelta
 
 def confirmar_cadastro_livro(livro_em_cadastro,estoque):
     cadastro_nao_cancelado = True
     opcao_invalida = False
     while cadastro_nao_cancelado:
         entrada_saida.solicitar_confirmacao_livro(livro_em_cadastro)
-        escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_editar,opcao_invalida,26)
+        escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_editar,opcao_invalida,28)
         if escolha in (1,2,3):
             match escolha:
                 case 1:
@@ -178,12 +179,30 @@ def confirmar_cadastro_cliente(cliente_em_cadastro, lista_usuarios):
                 case 3:
                     verificar_edicao_cliente(cliente_em_cadastro)
     
-def confirmar_aluguel(cliente, produto, tempo_aluguel, estoque):
-    if (entrada_saida.confirmar_aluguel(cliente, produto, tempo_aluguel)):
-       produto.set_locatario(cliente.get_nome())
-       produto.set_tempo_aluguel(tempo_aluguel)
-       estoque.add_lista_produto_alugado(produto)
+def confirmar_aluguel(cliente, produto, data_retirada, data_devolutiva, estoque):
+    cadastro_nao_cancelado = True
+    opcao_invalida = False
+    while cadastro_nao_cancelado:
+        entrada_saida.solicitar_confirmacao_aluguel(produto, cliente, data_retirada, data_devolutiva)        
+        entrada_saida.separa_texto("Confirmar cadastro?")
+        escolha = entrada_saida.solicitar_menu_sim_nao_editar(artes_ascii.menu_sim_não_bestseller, opcao_invalida, 22)
+        match escolha:
+            case 1:
+                produto.set_locatario(cliente.get_nome())
+                produto.set_data_retirada(date.today())
+                produto.set_data_devolutiva = date.today() + timedelta(days=14)
+                estoque.add_lista_produto_alugado(produto)
+                return True
+            case 2:
+                cadastro_nao_cancelado = False
+            case _:
+                opcao_invalida = True
 
+        # if (entrada_saida.confirmar_aluguel(cliente, produto, data_retirada, data_devolutiva)):
+        #     produto.set_locatario(cliente.get_nome())
+        #     produto.set_data_retirada = date.today()
+            
+        
 def valida_rg_cliente():
     rg = ""
     opcao_invalida = False
@@ -207,16 +226,20 @@ def valida_telefone_cliente():
             telefone_formatado = f"({telefone[:2]}) {telefone[2]} {telefone[3:7]}-{telefone[7:]}"
             return telefone_formatado
     
-def confirmar_tempo_aluguel():
-    match entrada_saida.solicitar_tempo_aluguel():
-        case 1:
-            return 7
-        case 2:
-            return 14
-        case 3:
-            return 21
-        case 4:
-            return 28
+def confirmar_tempo_aluguel(opcao_invalida, cliente):
+    while True:
+        entrada = entrada_saida.solicitar_tempo_aluguel(artes_ascii.menu_tempo_aluguel, opcao_invalida, 18, cliente)
+        if entrada in (1,2,3,4):
+            match entrada:
+                case 1:
+                    return 7
+                case 2:
+                    return 14
+                case 3:
+                    return 21
+                case 4:
+                    return 28
+        opcao_invalida = True
         
 def validar_exibicao_busca(produto):
     if(produto.get_tipo() == "Livro"):
