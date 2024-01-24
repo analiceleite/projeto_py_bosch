@@ -66,7 +66,7 @@ def limpa_tela():
 def separa_texto(texto):
     linhas = texto.split('\n')
     for linha in linhas:
-        print(linha.center(largura_tela))
+        print("\033[33m"+linha.center(largura_tela))
         
 
 def separa_confirmacao_livro(texto):

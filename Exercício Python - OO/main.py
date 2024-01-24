@@ -54,12 +54,6 @@ def main():
                     case _:
                         main()
             case 3:
-                pass
+                exit()
 
-                    
-# if __name__ == "__main__":
-#     estoque = estoque_produto
-#     livro_teste = livro()
-#    livro_teste.criar_livro(estoque)
-    # entrada_saida.obter_entrada_centralizada_float("teste",False)
 main()

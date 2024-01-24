@@ -297,8 +297,6 @@ def validar_avaliacao_produtos(produto, livro):
             opcao_invalida = True
         else:
             break
-    quantidade_votos = random.randint(1,livro.get_tiragem())
-    livro.set_quantidade_votos(quantidade_votos)
     return avaliacao_geral
 
 def valida_best_seller():

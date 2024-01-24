@@ -29,8 +29,7 @@ titulo_emprestimo_confirmado = "               >>> ALUGUEL CONFIRMADO <<<       
 menu_principal_opcoes = """
  [1]- Cadastrar   
  [2]- Buscar      
- [3]- Alugar      
- [4]- Sair        
+ [3]- Sair        
 """
 menu_opcoes_cadastro = """
 [1]- Produto   
@@ -127,6 +126,11 @@ menu_tempo_aluguel = """
 """
 
 def confirmacao_livro(livro):
+    estrelas = ""
+    i=0
+    while i <= livro.get_avaliacao_geral():
+        estrelas+= "★ "
+        i+=1
     detalhes_livro = (
     f"\nTítulo: {livro.get_titulo()}\n"
     f"Gênero: {livro.get_genero()}\n"
@@ -136,13 +140,18 @@ def confirmacao_livro(livro):
     f"Classificação indicativa: {livro.get_classificacao_indicativa()}+\n"
     f"Idioma: {livro.get_idioma()}\n"
     f"Tiragem: {livro.get_tiragem():,} cópias\n"
-    f"Avaliação: {livro.get_avaliacao_geral()}\n"
+    f"Avaliação: {livro.get_avaliacao_geral()} {estrelas}\n"
     f"Best Seller: {livro.get_is_best_seller()}\n"
     f"Quantidade disponível: {livro.get_quantidade_disponivel():,}"
     )
     return detalhes_livro
 
 def confirmacao_midia(midia):
+    estrelas = ""
+    i = 0
+    while i < midia.get_avaliacao_geral():
+        estrelas+= "★ "
+        i+=1
     detalhes_midia = (
     f"\nTítulo: {midia.get_titulo()}\n"
     f"Gênero: {midia.get_categoria()}\n"
@@ -152,7 +161,7 @@ def confirmacao_midia(midia):
     f"Classificação indicativa: {midia.get_classificacao_indicativa()}+\n"
     f"Idioma: {midia.get_idioma()}\n"
     f"Tiragem: {midia.get_tiragem():,} cópia(s)\n"
-    f"Avaliação: {midia.get_avaliacao_geral()}\n"
+    f"Avaliação: {midia.get_avaliacao_geral()}{ estrelas}\n"
     f"Quantidade disponível: {midia.get_quantidade_disponivel():,}"
     )
     return detalhes_midia
@@ -173,8 +182,7 @@ def confirmacao_revista(revista):
 def confirmacao_cliente(cliente):
     detalhes_cliente = (
     f"\nNome: {cliente.get_nome()}\n"
-    f"{cliente.get_rg()[0]}.{'.'.join([cliente.get_rg()[i:i+3] for i in range(1, 7, 3)])}\n"
-    #f"RG: {cliente.get_rg()}\n"
+    f"RG: {cliente.get_rg()[0]}.{'.'.join([cliente.get_rg()[i:i+3] for i in range(1, 7, 3)])}\n"
     f"Telefone: {cliente.get_telefone()}\n"
     f"Endereço: {cliente.get_endereco()}"
     )
