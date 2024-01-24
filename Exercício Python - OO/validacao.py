@@ -228,7 +228,7 @@ def valida_telefone_cliente():
     
 def confirmar_tempo_aluguel(opcao_invalida, cliente):
     while True:
-        entrada = entrada_saida.solicitar_tempo_aluguel(artes_ascii.menu_tempo_aluguel, opcao_invalida, 18, cliente)
+        entrada = entrada_saida.solicitar_tempo_aluguel(artes_ascii.menu_tempo_aluguel, opcao_invalida, 19, cliente)
         if entrada in (1,2,3,4):
             match entrada:
                 case 1:
